@@ -20,7 +20,7 @@ public class PlantUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Object.Instantiate(plantSpawn, DragObj.transform.position, DragObj.transform.rotation);
+        Object.Instantiate(plantSpawn, DragObj.transform.position, DragObj.transform.rotation, transform.parent);
         DragObj.SetActive(false);
     }
 }
