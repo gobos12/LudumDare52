@@ -19,10 +19,10 @@ public class CameraDrag : MonoBehaviour
         //save position of mouse in world space where drag starts
         var mousePos = Input.mousePosition;
         mousePos.z = -10;
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(1))
             origin = cam.ScreenToWorldPoint(mousePos);
         //Calculate distance between drag origin and new position
-        if(Input.GetMouseButton(0))
+        if(Input.GetMouseButton(1))
         {
             Vector3 difference = origin - cam.ScreenToWorldPoint(mousePos);
 
