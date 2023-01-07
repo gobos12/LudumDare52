@@ -73,7 +73,20 @@ public class Inventory : MonoBehaviour
                 GameObject obj = FindItem(slotTemplate.item.sprite).plantObject;
                 if (obj != null)
                 {
-                    Instantiate(obj, Input.mousePosition, transform.rotation, transform.parent);
+                    GameObject newObj = Instantiate(obj, Input.mousePosition, transform.rotation, transform.parent);
+                    if (newObj != null)
+                    {
+                        selectedItemSlot.itemCount--;
+                        Debug.Log(selectedItemSlot +  " " + selectedItemSlot.itemCount);
+                        if (selectedItemSlot.itemCount == 0)
+                        {
+                            //selectedItemSlot.slot.count.enabled = false;
+                            //selectedItemSlot.slot.item.enabled = false;
+                            //slotTemplate.count.enabled = false;
+                            //slotTemplate.item.enabled = false;
+                            //UpdateItems(inventorySlots);
+                        }
+                    }
                 }
             }
         }
@@ -112,6 +125,7 @@ public class Inventory : MonoBehaviour
     private void UpdateItems(SlotContainer[] slots)
     {
         for(int i = 0; i < slots.Length; i++){
+            Debug.Log(slots[i].itemSprite);
             Item slotItem = FindItem(slots[i].itemSprite);
             
             //item in slot

@@ -7,8 +7,9 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class BasePlant : MonoBehaviour, IPointerClickHandler
+public class BasePlant : MonoBehaviour
 {
+    [Header("Parameters")]
     [SerializeField] private float timeToMoveStage;
     private float growthTimer;
     private int currentStage = 0;
@@ -16,9 +17,15 @@ public class BasePlant : MonoBehaviour, IPointerClickHandler
     [SerializeField] private float durability;
     [SerializeField] private float baseValue;
 
+    [Header("Animation Sprites")]
     [SerializeField] private Sprite sprouting;
     [SerializeField] private Sprite fresh;
     [SerializeField] private Sprite wilted;
+
+    [Header("Inventory Sprites")] 
+    [SerializeField] private Sprite seedSprite;
+    [SerializeField] private Sprite grownSprite;
+    
     
     private float quality;
     // Start is called before the first frame update
@@ -53,11 +60,10 @@ public class BasePlant : MonoBehaviour, IPointerClickHandler
         
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerClick()
     {
         // calculate value, add to inventory
-        Debug.Log("test");
-        Destroy(gameObject);
+        GetComponent<Image>().sprite = grownSprite;
     }
 
     private float GetItemValue()
