@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class BasePlant : MonoBehaviour
+public class BasePlant : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private float timeToMoveStage;
     private float growthTimer;
@@ -51,13 +52,16 @@ public class BasePlant : MonoBehaviour
         
     }
 
-    private void OnMouseDown()
+    public void OnPointerClick(PointerEventData eventData)
     {
         // calculate value, add to inventory
-        Destroy(this);
+        Debug.Log("test");
+        Destroy(gameObject);
     }
 
-    private void OnMouseUp()
+    private float GetItemValue()
     {
+        if (currentStage == 3) return 0;
+        return baseValue * (currentStage + 1) / 2;
     }
 }
