@@ -4,41 +4,30 @@ using UnityEngine;
 
 public class CameraDrag : MonoBehaviour
 {
-    private Vector3 Origin;
-    private Vector3 Difference;
-    private Vector3 ResetCamera;
-    private Camera Camera;
-
-    private bool drag = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        Camera = GetComponent<Camera>();
-        ResetCamera = Camera.main.transform.position;
-    }
+    [SerializeField]
+    private Camera cam;
+    private Vector3 origin;
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        PanCamera();
+    }
+
+    private void PanCamera()
+    {
+        //save position of mouse in world space where drag starts
+        var mousePos = Input.mousePosition;
+        mousePos.z = -10;
+        if(Input.GetMouseButtonDown(0))
+            origin = cam.ScreenToWorldPoint(mousePos);
+        //Calculate distance between drag origin and new position
         if(Input.GetMouseButton(0))
         {
-            Difference = (Camera.main.ScreenToWorldPoint(Input.mousePosition)) - Camera.main.transform.position;
-            if(drag == false)
-            {
-                drag = true;
-                Origin = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            }
-        }
-        else
-        {
-            drag = false;
-        }
-        if (drag)
-        {
-            Camera.main.transform.position = Origin - Difference;
-        }
+            Vector3 difference = origin - cam.ScreenToWorldPoint(mousePos);
 
-        if (Input.GetMouseButton(1))
-            Camera.main.transform.position = ResetCamera;
+            //move the camera by that distance
+            cam.transform.position += difference;
+        }
     }
 }
