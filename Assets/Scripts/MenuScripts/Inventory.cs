@@ -8,9 +8,14 @@ public class Inventory : MonoBehaviour
     public static Inventory singleton;
 
     public RectTransform inventorySlotsContainer;
+    public RectTransform marketSlotsContainer;
     
     public SlotTemplate slotTemplate;
+    public SlotTemplate marketSlotTemplate;
+
     public SlotContainer[] inventorySlots;
+    private SlotContainer[] marketSlots = new SlotContainer[3];
+
     public Item[] items; //array of all available items
 
     SlotContainer selectedItemSlot = null;
@@ -24,13 +29,26 @@ public class Inventory : MonoBehaviour
         slotTemplate.container.rectTransform.anchorMax = slotTemplate.container.rectTransform.anchorMin = new Vector2(0,1);
         slotTemplate.gameObject.SetActive(false);
 
+        //sets up market slot template
+        marketSlotTemplate.container.rectTransform.pivot = new Vector2(0,1);
+        marketSlotTemplate.container.rectTransform.anchorMax = marketSlotTemplate.container.rectTransform.anchorMin = new Vector2(0,1);
+        marketSlotTemplate.gameObject.SetActive(false);
+
         //initialize inventory slots
-        InitilizeSlotTable(inventorySlotsContainer, slotTemplate, inventorySlots, 16, 1);
+        InitilizeSlotTable(inventorySlotsContainer, slotTemplate, inventorySlots, 16, 0);
         UpdateItems(inventorySlots);
+
+        //Initialize market slots
+        InitilizeSlotTable(marketSlotsContainer, marketSlotTemplate, marketSlots, 16, 1);
+        UpdateItems(marketSlots);
 
         //reset slot element template
         slotTemplate.container.rectTransform.pivot = new Vector2(0.5f, 0.5f);
         slotTemplate.container.raycastTarget = slotTemplate.item.raycastTarget = slotTemplate.count.raycastTarget = false;
+
+        //reset market slot template (necessary??? idk)
+        marketSlotTemplate.container.rectTransform.pivot = new Vector2(0.5f, 0.5f);
+        marketSlotTemplate.container.raycastTarget = slotTemplate.item.raycastTarget = slotTemplate.count.raycastTarget = false;
     }
 
     private void Update()
