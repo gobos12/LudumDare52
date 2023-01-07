@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,9 +34,9 @@ public class Inventory : MonoBehaviour
     private void Update()
     {
         //moving items around w mouse
-        if(selectedItemSlot != null)
+        if (selectedItemSlot != null)
         {
-            if(!slotTemplate.gameObject.activeSelf)
+            if (!slotTemplate.gameObject.activeSelf)
             {
                 slotTemplate.gameObject.SetActive(true);
                 slotTemplate.container.enabled = false;
@@ -63,6 +61,20 @@ public class Inventory : MonoBehaviour
             if(slotTemplate.gameObject.activeSelf)
             {
                 slotTemplate.gameObject.SetActive(false);
+            }
+        }
+
+        if (slotTemplate.gameObject.activeSelf && Input.GetMouseButtonDown(0))
+        {
+            Vector2 localMousePosition = inventorySlotsContainer.InverseTransformPoint(Input.mousePosition);
+            if (!inventorySlotsContainer.rect.Contains(localMousePosition))
+            {
+                // object is selected, mouse has been clicked, and mouse position is outside of Inventory UI
+                GameObject obj = FindItem(slotTemplate.item.sprite).plantObject;
+                if (obj != null)
+                {
+                    Instantiate(obj, Input.mousePosition, transform.rotation, transform.parent);
+                }
             }
         }
     }
