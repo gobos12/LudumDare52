@@ -358,6 +358,29 @@ public class Inventory : MonoBehaviour
         //insert code for what to do when there is no more space in inventory
     }
 
+    public void AddItem(Image image)
+    {
+        for(int i = 0; i < inventorySlots.Length; i++){
+            //if item exists in inventory
+            if(inventorySlots[i].itemSprite == image.sprite){
+                inventorySlots[i].itemCount++;
+                UpdateItems(inventorySlots);
+                return;
+            }
+            //if it does not exist in inventory
+            else if(inventorySlots[i].itemSprite == null){
+                inventorySlots[i].itemSprite = image.sprite;
+                inventorySlots[i].itemCount = 1;
+                UpdateItems(inventorySlots);
+                return;
+            }
+
+            else{
+                Debug.Log("error");
+            }
+        }
+    }
+
     public void RemoveItem(SlotContainer s)
     {
         s.itemSprite = null;

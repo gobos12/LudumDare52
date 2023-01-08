@@ -23,4 +23,10 @@ public class Currency : MonoBehaviour
         moneyText.text = "$" + myMoney.ToString();
     }
 
+    public void TakeMoney(int amount)
+    {
+        myMoney -= amount;
+        moneyText.text = "$" + myMoney.ToString();
+    }
+
 }
