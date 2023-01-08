@@ -6,9 +6,16 @@ public class Inventory : MonoBehaviour
     public static Inventory singleton;
 
     public RectTransform inventorySlotsContainer;
+    public RectTransform plantSlotsContainer;
+    public RectTransform sellSlotsContainer;
     
+    //templates
     public SlotTemplate slotTemplate;
+    public SlotTemplate plantSlotTemplate;
+
     public SlotContainer[] inventorySlots;
+    public SlotContainer[] plantSlots;
+    public SlotContainer[] sellSlots;
     public Item[] items; //array of all available items
 
     SlotContainer selectedItemSlot = null;
@@ -18,17 +25,34 @@ public class Inventory : MonoBehaviour
         singleton = this;
 
         //sets up slot element template
+        plantSlotTemplate.container.rectTransform.pivot = new Vector2(0,1);
+        plantSlotTemplate.container.rectTransform.anchorMax = plantSlotTemplate.container.rectTransform.anchorMin = new Vector2(0,1);
+        plantSlotTemplate.gameObject.SetActive(false);
+
+        //sets up plant slot template
         slotTemplate.container.rectTransform.pivot = new Vector2(0,1);
         slotTemplate.container.rectTransform.anchorMax = slotTemplate.container.rectTransform.anchorMin = new Vector2(0,1);
         slotTemplate.gameObject.SetActive(false);
 
         //initialize inventory slots
-        InitilizeSlotTable(inventorySlotsContainer, slotTemplate, inventorySlots, 16, 1);
+        InitilizeSlotTable(inventorySlotsContainer, slotTemplate, inventorySlots, 32, 0);
         UpdateItems(inventorySlots);
+
+        //initialize plant slots
+        InitilizeSlotTable(plantSlotsContainer, plantSlotTemplate, plantSlots, 16, 1);
+        UpdateItems(plantSlots);
+
+        //initialize sell slots
+        InitilizeSlotTable(sellSlotsContainer, slotTemplate, sellSlots, 16, 2);
+        UpdateItems(sellSlots);
 
         //reset slot element template
         slotTemplate.container.rectTransform.pivot = new Vector2(0.5f, 0.5f);
         slotTemplate.container.raycastTarget = slotTemplate.item.raycastTarget = slotTemplate.count.raycastTarget = false;
+
+        plantSlotTemplate.container.rectTransform.pivot = new Vector2(0.5f, 0.5f);
+        plantSlotTemplate.container.raycastTarget = plantSlotTemplate.item.raycastTarget = plantSlotTemplate.count.raycastTarget = false;
+
     }
 
     private void Update()
@@ -167,6 +191,20 @@ public class Inventory : MonoBehaviour
             }
         }
 
+        for(int i = 0; i < plantSlots.Length; i++){
+            if(plantSlots[i].slot.hasClicked){
+                plantSlots[i].slot.hasClicked = false;
+                return plantSlots[i];
+            }
+        }
+
+        for(int i = 0; i < sellSlots.Length; i++){
+            if(sellSlots[i].slot.hasClicked){
+                sellSlots[i].slot.hasClicked = false;
+                return sellSlots[i];
+            }
+        }
+
         return null;
     }
 
@@ -191,7 +229,7 @@ public class Inventory : MonoBehaviour
                 bool swapPositions = false;
                 bool releaseClick = true;
 
-                if(newClickedSlot != selectedItemSlot){
+                if(newClickedSlot != selectedItemSlot){ //inventory
                     //clicked on same table, different slots
                     if(newClickedSlot.tableID == selectedItemSlot.tableID){
                         //check to see if the new clicked item is the same (stack if yes, else swap)
@@ -211,9 +249,57 @@ public class Inventory : MonoBehaviour
                             swapPositions = true;
                         }
                     }
-
+                    
                     else{
-                        //moving to different table (for black market menu)
+                        //moving to different table
+                        if(newClickedSlot.tableID == 1){ //plant slot
+                        Debug.Log("planter");
+                            if(newClickedSlot.itemSprite == null){ //empty slot
+                                Item slotItem = FindItem(selectedItemSlot.itemSprite);
+                                Instantiate(slotItem.plantObject, newClickedSlot.slot.container.transform);
+                                selectedItemSlot.itemCount--;
+                                if(selectedItemSlot.itemCount <= 0){
+                                    selectedItemSlot.itemSprite = null;
+                                }
+                            }
+                        }
+                        else if(newClickedSlot.tableID == 2){ //sell slot
+                            Debug.Log("sell slot");
+                            if(newClickedSlot.itemSprite == selectedItemSlot.itemSprite){
+                                Item slotItem = FindItem(selectedItemSlot.itemSprite);
+                                if(slotItem.stackable){
+                                    //item is the same and stackable
+                                    selectedItemSlot.itemSprite = null;
+                                    newClickedSlot.itemCount += selectedItemSlot.itemCount;
+                                    selectedItemSlot.itemCount = 0;
+                                }
+                                else{
+                                    swapPositions = true;
+                                }
+                            }
+
+                            else{
+                                swapPositions = true;
+                            }
+                        }
+
+                        else{
+                            if(newClickedSlot.itemSprite == null || newClickedSlot.itemSprite == selectedItemSlot.itemSprite){
+                                //adds one item from selectedItemSlot
+                                newClickedSlot.itemSprite = selectedItemSlot.itemSprite;
+                                newClickedSlot.itemCount++;
+                                selectedItemSlot.itemCount--;
+                                if(selectedItemSlot.itemCount <= 0){
+                                    selectedItemSlot.itemSprite = null;
+                                }
+                                else{
+                                    releaseClick = false;
+                                }
+                            }
+                            else{
+                                swapPositions = true;
+                            }
+                        }
                     }
                 }
 
@@ -237,6 +323,8 @@ public class Inventory : MonoBehaviour
 
                 //Update UI
                 UpdateItems(inventorySlots);
+                UpdateItems(plantSlots);
+                UpdateItems(sellSlots);
             }
         }
     }
@@ -260,9 +348,18 @@ public class Inventory : MonoBehaviour
                 obj.SetActive(false);
                 return;
             }
+
+            else{
+                Debug.Log("error");
+            }
         }
 
         //insert code for what to do when there is no more space in inventory
+    }
+
+    public void RemoveItem()
+    {
+        
     }
     
 }

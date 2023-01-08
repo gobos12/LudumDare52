@@ -6,12 +6,11 @@ using UnityEngine.EventSystems;
 
 public class Interactable : MonoBehaviour, IPointerClickHandler
 {
-    public UnityEvent onInteract;
+    //public UnityEvent onInteract; //removed for now bc unnecessary
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        onInteract.Invoke();
-        Debug.Log("clicking");
+        Inventory.singleton.AddItem(gameObject);
     }
 
 }
