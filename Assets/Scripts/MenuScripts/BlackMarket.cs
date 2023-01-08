@@ -22,7 +22,7 @@ public class BlackMarket : MonoBehaviour
         //teeth seeds
         BuySlotTemplate teethSeeds = Instantiate(prefab, transform);
         teethSeeds.name.text = "Teeth Seeds";
-        teethSeeds.cost.text = "5";
+        teethSeeds.cost.text = "$5";
         teethSeeds.item.sprite = teeth.itemSprite;
         teethSeeds.buy.onClick.AddListener(delegate
             {
@@ -37,7 +37,7 @@ public class BlackMarket : MonoBehaviour
         //bone seeds
         BuySlotTemplate boneSeeds = Instantiate(prefab, transform);
         boneSeeds.name.text = "Bone Seeds";
-        boneSeeds.cost.text = "5";
+        boneSeeds.cost.text = "$5";
         boneSeeds.item.sprite = bones.itemSprite;
         boneSeeds.buy.onClick.AddListener(delegate
             {
@@ -52,7 +52,7 @@ public class BlackMarket : MonoBehaviour
         //eyeball seeds
         BuySlotTemplate eyeballSeeds = Instantiate(prefab, transform);
         eyeballSeeds.name.text = "Eye Seeds";
-        eyeballSeeds.cost.text = "10";
+        eyeballSeeds.cost.text = "$10";
         eyeballSeeds.item.sprite = eyeball.itemSprite;
         eyeballSeeds.buy.onClick.AddListener(delegate
             {
@@ -68,7 +68,7 @@ public class BlackMarket : MonoBehaviour
         //Heart seeds
         BuySlotTemplate heartSeeds = Instantiate(prefab, transform);
         heartSeeds.name.text = "Heart Seeds";
-        heartSeeds.cost.text = "25";
+        heartSeeds.cost.text = "$25";
         heartSeeds.item.sprite = heart.itemSprite;
         heartSeeds.buy.onClick.AddListener(delegate
             {
@@ -83,7 +83,7 @@ public class BlackMarket : MonoBehaviour
         //Brain Seeds
         BuySlotTemplate brainSeeds = Instantiate(prefab, transform);
         brainSeeds.name.text = "Brain Seeds";
-        brainSeeds.cost.text = "50";
+        brainSeeds.cost.text = "$50";
         brainSeeds.item.sprite = brain.itemSprite;
         brainSeeds.buy.onClick.AddListener(delegate
             {
@@ -98,21 +98,21 @@ public class BlackMarket : MonoBehaviour
         //Scarecrow
         BuySlotTemplate scarecrow = Instantiate(prefab, transform);
         scarecrow.name.text = "Scarecrow";
-        scarecrow.cost.text = "75";
+        scarecrow.cost.text = "$75";
 
         //Ashes
         BuySlotTemplate ashes = Instantiate(prefab, transform);
         ashes.name.text = "Human Ashes";
-        ashes.cost.text = "30";
+        ashes.cost.text = "$30";
 
         //Blue flame
         BuySlotTemplate fire = Instantiate(prefab, transform);
         fire.name.text = "Blue Flame";
-        fire.cost.text = "100";
+        fire.cost.text = "$100";
 
         //Zambie
         BuySlotTemplate zombie = Instantiate(prefab, transform);
         zombie.name.text = "Zombie";
-        zombie.cost.text = "250";
+        zombie.cost.text = "$250";
     }
 }
