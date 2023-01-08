@@ -34,8 +34,6 @@ public class CameraDrag : MonoBehaviour
     private void Update()
     {
         PanCamera();
-        //print("MouseX: " + Input.mousePosition.x + " MouseY: " + Input.mousePosition.y);
-        //print(Input.mousePosition);
     }
 
     private void PanCamera()
@@ -43,6 +41,8 @@ public class CameraDrag : MonoBehaviour
         //save position of mouse in world space where drag starts
         var mousePos = Input.mousePosition;
         mousePos.z = cam.transform.position.z;
+
+        //Allows for panning when holding the middle button
         // if(Input.GetMouseButtonDown(2))
         //     origin = cam.ScreenToWorldPoint(mousePos);
         // print(cam.ScreenToWorldPoint(mousePos));
@@ -58,9 +58,19 @@ public class CameraDrag : MonoBehaviour
         // }
         //print(cam.ScreenToWorldPoint(mousePos));
         //print(mousePos);
+
+        //Measures how far the mouse is from the center
         origin = new Vector3(220, 125, cam.transform.position.z);
-        Vector3 difference = origin - mousePos;
-        print(difference);
+        Vector3 difference = mousePos - origin;
+
+        //Pan camera if mouse is too far from center
+        if(difference.x < -150 || difference.x > 150 || difference.y < -80 || difference.y > 80)
+        {
+            difference.x /= 10;
+            difference.y /= 10;
+            
+            cam.transform.position = ClampCamera(cam.transform.position + difference);
+        }
         
     }
 
