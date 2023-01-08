@@ -2201,6 +2201,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teeth Plant
       objectReference: {fileID: 0}
+    - target: {fileID: 2517800977483248605, guid: b50615ae26b7f8540ab67246670d52c7, type: 3}
+      propertyPath: name
+      value: Teeth
+      objectReference: {fileID: 0}
     - target: {fileID: 7686233198082952065, guid: b50615ae26b7f8540ab67246670d52c7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2503,6 +2507,10 @@ PrefabInstance:
     - target: {fileID: 509843086781273102, guid: a72b04db7dee50a4a999ddc4f531c31e, type: 3}
       propertyPath: m_Name
       value: Eyeball Plant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2517800977483248605, guid: a72b04db7dee50a4a999ddc4f531c31e, type: 3}
+      propertyPath: name
+      value: Eyeball
       objectReference: {fileID: 0}
     - target: {fileID: 7686233198082952065, guid: a72b04db7dee50a4a999ddc4f531c31e, type: 3}
       propertyPath: m_Pivot.x
@@ -3745,14 +3753,18 @@ MonoBehaviour:
     stackable: 1
     sellable: 0
     plantObject: {fileID: 509843086781273102, guid: ac23364aff87fa14d951e375dc916cdd, type: 3}
-    isWard: 0
-  - name: Scarecrow
+  - name: Scarecrow01
     itemSprite: {fileID: 21300000, guid: 2eb46fcaf32c1474a8bcf76c4bf9c12b, type: 3}
     cost: 75
     stackable: 1
     sellable: 0
     plantObject: {fileID: 0}
-    isWard: 0
+  - name: Scarecrow02
+    itemSprite: {fileID: 21300000, guid: 35e15bf730aaf804fbcff9db1ec4e7aa, type: 3}
+    cost: 250
+    stackable: 1
+    sellable: 0
+    plantObject: {fileID: 0}
   - name: Ashes
     itemSprite: {fileID: 21300000, guid: e4ae48e68adea4b4faf2c6c808dffacc, type: 3}
     cost: 30
@@ -4392,9 +4404,15 @@ MonoBehaviour:
     stackable: 0
     sellable: 0
     plantObject: {fileID: 509843086781273102, guid: ac23364aff87fa14d951e375dc916cdd, type: 3}
-    isWard: 0
-  _scarecrow:
-    name: 
+  _scarecrow01:
+    name: Scarecrow01
+    itemSprite: {fileID: 21300000, guid: 2eb46fcaf32c1474a8bcf76c4bf9c12b, type: 3}
+    cost: 0
+    stackable: 0
+    sellable: 0
+    plantObject: {fileID: 0}
+  _scarecrow02:
+    name: Scarecrow02
     itemSprite: {fileID: 21300000, guid: 35e15bf730aaf804fbcff9db1ec4e7aa, type: 3}
     cost: 0
     stackable: 0
@@ -4808,6 +4826,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bone Plant
       objectReference: {fileID: 0}
+    - target: {fileID: 2517800977483248605, guid: ff407fc15670cff409d98f905f8ee56f, type: 3}
+      propertyPath: name
+      value: Bone
+      objectReference: {fileID: 0}
     - target: {fileID: 7686233198082952065, guid: ff407fc15670cff409d98f905f8ee56f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5193,6 +5215,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Heart Plant
       objectReference: {fileID: 0}
+    - target: {fileID: 2517800977483248605, guid: fed8fca17b7de5e408ca13d12606837a, type: 3}
+      propertyPath: name
+      value: Heart
+      objectReference: {fileID: 0}
     - target: {fileID: 7686233198082952065, guid: fed8fca17b7de5e408ca13d12606837a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5429,6 +5455,10 @@ PrefabInstance:
     - target: {fileID: 509843086781273102, guid: ac23364aff87fa14d951e375dc916cdd, type: 3}
       propertyPath: m_Name
       value: Brain Plant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2517800977483248605, guid: ac23364aff87fa14d951e375dc916cdd, type: 3}
+      propertyPath: name
+      value: Brain
       objectReference: {fileID: 0}
     - target: {fileID: 7686233198082952065, guid: ac23364aff87fa14d951e375dc916cdd, type: 3}
       propertyPath: m_Pivot.x
