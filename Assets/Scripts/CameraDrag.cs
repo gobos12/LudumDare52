@@ -20,8 +20,6 @@ public class CameraDrag : MonoBehaviour
     {
         canvas = FindObjectOfType<Canvas>();
 
-        
-
         canvasHeight = canvas.GetComponent<RectTransform>().rect.height;
         canvasWidth = canvas.GetComponent<RectTransform>().rect.width;
 
@@ -30,8 +28,6 @@ public class CameraDrag : MonoBehaviour
 
         mapMinY = canvas.transform.position.y - canvasHeight / 2f;
         mapMaxY = canvas.transform.position.y + canvasHeight / 2f;
-
-        
     }    
 
     // Update is called once per frame
@@ -45,18 +41,37 @@ public class CameraDrag : MonoBehaviour
         //save position of mouse in world space where drag starts
         var mousePos = Input.mousePosition;
         mousePos.z = cam.transform.position.z;
-        if(Input.GetMouseButtonDown(2))
-            origin = cam.ScreenToWorldPoint(mousePos);
-        //Calculate distance between drag origin and new position
-        if(Input.GetMouseButton(2))
-        {
-            Vector3 difference = origin - cam.ScreenToWorldPoint(mousePos);
 
-            //move the camera by that distance
+        //Allows for panning when holding the middle button
+        // if(Input.GetMouseButtonDown(2))
+        //     origin = cam.ScreenToWorldPoint(mousePos);
+        // print(cam.ScreenToWorldPoint(mousePos));
+        // //Calculate distance between drag origin and new position
+        // if(Input.GetMouseButton(2))
+        // {
+        //     Vector3 difference = origin - cam.ScreenToWorldPoint(mousePos);
+
+        //     //move the camera by that distance
+        //     cam.transform.position = ClampCamera(cam.transform.position + difference);
+        //     //print(ClampCamera(cam.transform.position + difference));
+        //     //cam.transform.position += difference;
+        // }
+        //print(cam.ScreenToWorldPoint(mousePos));
+        //print(mousePos);
+
+        //Measures how far the mouse is from the center
+        origin = new Vector3(220, 125, cam.transform.position.z);
+        Vector3 difference = mousePos - origin;
+
+        //Pan camera if mouse is too far from center
+        if(difference.x < -150 || difference.x > 150 || difference.y < -80 || difference.y > 80)
+        {
+            difference.x /= 10;
+            difference.y /= 10;
+            
             cam.transform.position = ClampCamera(cam.transform.position + difference);
-            //print(ClampCamera(cam.transform.position + difference));
-            //cam.transform.position += difference;
         }
+        
     }
 
     //Stops camera from panning if it goes out of bounds
@@ -70,7 +85,7 @@ public class CameraDrag : MonoBehaviour
         float minY = mapMinY + camHeight;
         float maxY = mapMaxY - camHeight;
 
-        print(camWidth);
+        //print(camWidth);
 
         float newX = Mathf.Clamp(targetPosition.x, minX, maxX);
         float newY = Mathf.Clamp(targetPosition.y, minY, maxY);
