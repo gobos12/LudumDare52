@@ -111,7 +111,9 @@ public class BasePlant : MonoBehaviour
             {
                 ghost.SetActive(false);
                 currentGhostState = GhostState.Unprotected;
-                Inventory.singleton.SelectedItemSlot.itemCount--;
+            } else if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).name == "Shovel" && currentStage == 3)
+            {
+                gameObject.SetActive(false);
             }
         }
         catch (NullReferenceException e)

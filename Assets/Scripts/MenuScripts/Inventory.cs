@@ -46,8 +46,10 @@ public class Inventory : MonoBehaviour
         UpdateItems(inventorySlots);
         inventorySlots[0].itemSprite = startingItem.itemSprite;
         inventorySlots[0].itemCount = 4;
-        inventorySlots[1].itemSprite = items[^1].itemSprite;
-        inventorySlots[1].itemCount = 5;
+        inventorySlots[1].itemSprite = items[^2].itemSprite;
+        inventorySlots[1].itemCount = 1;
+        inventorySlots[2].itemSprite = items[^1].itemSprite;
+        inventorySlots[2].itemCount = 1;
         UpdateItems(inventorySlots);
 
         //initialize plant slots
