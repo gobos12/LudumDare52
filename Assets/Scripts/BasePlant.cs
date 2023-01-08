@@ -25,7 +25,8 @@ public class BasePlant : MonoBehaviour
     [SerializeField] private Sprite fresh;
     [SerializeField] private Sprite wilted;
 
-    [Header("Inventory Sprites")]
+    [Header("Inventory Sprites")] [SerializeField]
+    private GameObject ashes;
     [SerializeField] private Sprite seedSprite;
     [SerializeField] private Sprite grownSprite;
 
@@ -113,6 +114,30 @@ public class BasePlant : MonoBehaviour
                 currentGhostState = GhostState.Unprotected;
             } else if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).name == "Shovel" && currentStage == 3)
             {
+                gameObject.SetActive(false);
+            } else if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).name == "Ashes")
+            {
+                Inventory.singleton.SelectedItemSlot.itemCount--;
+                if (Inventory.singleton.SelectedItemSlot.itemCount <= 0)
+                {
+                    Inventory.singleton.SelectedItemSlot.itemSprite = null;
+                }
+                Inventory.singleton.UpdateItems(Inventory.singleton.inventorySlots);
+                Inventory.singleton.UpdateItems(Inventory.singleton.plantSlots);
+                Inventory.singleton.UpdateItems(Inventory.singleton.sellSlots);
+                freshTime += 5;
+            } else if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).name == "Blue Flame")
+            {
+                Debug.Log("getting here");
+                Inventory.singleton.SelectedItemSlot.itemCount--;
+                if (Inventory.singleton.SelectedItemSlot.itemCount <= 0)
+                {
+                    Inventory.singleton.SelectedItemSlot.itemSprite = null;
+                }
+                Inventory.singleton.AddItem(ashes);
+                Inventory.singleton.UpdateItems(Inventory.singleton.inventorySlots);
+                Inventory.singleton.UpdateItems(Inventory.singleton.plantSlots);
+                Inventory.singleton.UpdateItems(Inventory.singleton.sellSlots);
                 gameObject.SetActive(false);
             }
         }

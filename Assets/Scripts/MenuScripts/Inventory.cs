@@ -393,6 +393,27 @@ public class Inventory : MonoBehaviour
     //adds item to inventory
     public void AddItem(GameObject obj)
     {
+        if (obj.name.Contains("Ashes"))
+        {
+            for (int i = 0; i < inventorySlots.Length; i++)
+            {
+                if (inventorySlots[i].itemSprite == obj.GetComponent<Image>().sprite)
+                {
+                    inventorySlots[i].itemCount++;
+                    UpdateItems(inventorySlots);
+                    obj.SetActive(false);
+                    return;
+                }
+                else if (inventorySlots[i].itemSprite == null)
+                {
+                    inventorySlots[i].itemSprite = obj.GetComponent<Image>().sprite;
+                    inventorySlots[i].itemCount = 1;
+                    UpdateItems(inventorySlots);
+                    obj.SetActive(false);
+                    return;
+                }
+            }
+        }
         var type = obj.GetComponent<BasePlant>();
         Debug.Log(type.name);
         for(int i = 0; i < inventorySlots.Length; i++){

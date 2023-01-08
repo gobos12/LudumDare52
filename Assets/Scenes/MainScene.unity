@@ -4857,20 +4857,6 @@ MonoBehaviour:
     sellable: 0
     plantObject: {fileID: 509843086781273102, guid: ac23364aff87fa14d951e375dc916cdd, type: 3}
     isWard: 0
-  - name: Ashes
-    itemSprite: {fileID: 21300000, guid: e4ae48e68adea4b4faf2c6c808dffacc, type: 3}
-    cost: 30
-    stackable: 1
-    sellable: 0
-    plantObject: {fileID: 0}
-    isWard: 0
-  - name: Blue Flame
-    itemSprite: {fileID: 0}
-    cost: 100
-    stackable: 1
-    sellable: 0
-    plantObject: {fileID: 0}
-    isWard: 0
   - name: Zombie
     itemSprite: {fileID: 0}
     cost: 250
@@ -4884,6 +4870,20 @@ MonoBehaviour:
     stackable: 1
     sellable: 0
     plantObject: {fileID: 4385070878154742895, guid: 1e20ade86c49e9744922e73119254f16, type: 3}
+    isWard: 0
+  - name: Ashes
+    itemSprite: {fileID: 21300000, guid: e4ae48e68adea4b4faf2c6c808dffacc, type: 3}
+    cost: 30
+    stackable: 1
+    sellable: 0
+    plantObject: {fileID: 0}
+    isWard: 0
+  - name: Blue Flame
+    itemSprite: {fileID: 21300000, guid: 1b35de2878b9e574eb1c8ffd73be310c, type: 3}
+    cost: 100
+    stackable: 1
+    sellable: 0
+    plantObject: {fileID: 0}
     isWard: 0
   - name: Ward
     itemSprite: {fileID: 21300000, guid: 0a50b4d317c1fdd4187c928586fba938, type: 3}
