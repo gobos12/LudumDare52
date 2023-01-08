@@ -31,6 +31,10 @@ public class BasePlant : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GetComponent<Interactable>().onInteract.AddListener((() =>
+        {
+            Inventory.singleton.AddItem(gameObject);
+        }));
     }
 
     // Update is called once per frame

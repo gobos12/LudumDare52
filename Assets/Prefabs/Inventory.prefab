@@ -401,10 +401,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventorySlotsContainer: {fileID: 6065570646085551158}
-  slotTemplate: {fileID: 0}
+  slotTemplate: {fileID: 5927694303637077546, guid: 17093b250918c4d049c6128467cffb43, type: 3}
   inventorySlots:
-  - itemSprite: {fileID: 21300000, guid: dcea1042200e04c099f0347af55b2fb2, type: 3}
-    itemCount: 30
+  - itemSprite: {fileID: 0}
+    itemCount: 0
     tableID: 0
     slot: {fileID: 0}
   - itemSprite: {fileID: 0}

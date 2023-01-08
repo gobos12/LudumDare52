@@ -23,6 +23,10 @@ public class Inventory : MonoBehaviour
         slotTemplate.gameObject.SetActive(false);
 
         //initialize inventory slots
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            inventorySlots[i] = null;
+        }
         InitilizeSlotTable(inventorySlotsContainer, slotTemplate, inventorySlots, 16, 1);
         UpdateItems(inventorySlots);
 
@@ -125,7 +129,6 @@ public class Inventory : MonoBehaviour
     private void UpdateItems(SlotContainer[] slots)
     {
         for(int i = 0; i < slots.Length; i++){
-            Debug.Log(slots[i].itemSprite);
             Item slotItem = FindItem(slots[i].itemSprite);
             
             //item in slot
