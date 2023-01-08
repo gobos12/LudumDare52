@@ -3507,6 +3507,7 @@ MonoBehaviour:
     stackable: 1
     sellable: 0
     plantObject: {fileID: 509843086781273102, guid: b50615ae26b7f8540ab67246670d52c7, type: 3}
+    isWard: 0
   inventorySlotsContainer: {fileID: 1076048081}
   plantSlotsContainer: {fileID: 819559092}
   sellSlotsContainer: {fileID: 1604507043}
@@ -3654,84 +3655,98 @@ MonoBehaviour:
     stackable: 1
     sellable: 1
     plantObject: {fileID: 509843086781273102, guid: a72b04db7dee50a4a999ddc4f531c31e, type: 3}
+    isWard: 0
   - name: Grown Eyeball
-    itemSprite: {fileID: 21300000, guid: dcea1042200e04c099f0347af55b2fb2, type: 3}
+    itemSprite: {fileID: 21300000, guid: b566c817b1b4d4b40a084935e7590f2d, type: 3}
     cost: 5
     stackable: 1
     sellable: 1
     plantObject: {fileID: 0}
+    isWard: 0
   - name: Bone Inventory Sprite
     itemSprite: {fileID: 21300000, guid: 8d8b450e9e92b994f9bd469bba4a6f8c, type: 3}
     cost: 2
     stackable: 1
     sellable: 1
     plantObject: {fileID: 509843086781273102, guid: ff407fc15670cff409d98f905f8ee56f, type: 3}
+    isWard: 0
   - name: Grown Bone
     itemSprite: {fileID: 21300000, guid: bc57e2ef235eaef4f940bc0e74e5b964, type: 3}
     cost: 2
     stackable: 1
     sellable: 1
     plantObject: {fileID: 0}
+    isWard: 0
   - name: Brain Inventory Sprite
     itemSprite: {fileID: 21300000, guid: 1e18b2ac355dec84482ba7d873a87b16, type: 3}
     cost: 25
     stackable: 1
     sellable: 1
     plantObject: {fileID: 509843086781273102, guid: ac23364aff87fa14d951e375dc916cdd, type: 3}
+    isWard: 0
   - name: Grown Brain
-    itemSprite: {fileID: 21300000, guid: c5cba9eca83b054419e00aa8007453cf, type: 3}
+    itemSprite: {fileID: 21300000, guid: 41bc5b2f5a6b7ab41a956c61bcbf3e4d, type: 3}
     cost: 25
     stackable: 1
     sellable: 1
     plantObject: {fileID: 0}
+    isWard: 0
   - name: Heart Inventory Sprite
     itemSprite: {fileID: 21300000, guid: 9e2d2cb05aa5c6b49ba45b4184235c42, type: 3}
     cost: 12
     stackable: 1
     sellable: 1
     plantObject: {fileID: 509843086781273102, guid: fed8fca17b7de5e408ca13d12606837a, type: 3}
+    isWard: 0
   - name: Grown Heart
-    itemSprite: {fileID: 21300000, guid: 83b10350b5e67fd48933d1794360775f, type: 3}
+    itemSprite: {fileID: 21300000, guid: a8a078ef86d1ed34c9cbe05b6dc9a26f, type: 3}
     cost: 12
     stackable: 1
     sellable: 1
     plantObject: {fileID: 0}
+    isWard: 0
   - name: Teeth Inventory Sprite
     itemSprite: {fileID: 21300000, guid: e0f293dc4b5e20c4992dfe244ab12f36, type: 3}
     cost: 2
     stackable: 1
     sellable: 1
     plantObject: {fileID: 509843086781273102, guid: b50615ae26b7f8540ab67246670d52c7, type: 3}
+    isWard: 0
   - name: Grown Teeth
-    itemSprite: {fileID: 21300000, guid: 73f24037d0b8a8b45a1137a080815bff, type: 3}
+    itemSprite: {fileID: 21300000, guid: 0b3b29b082ae34d42bfd98eedc23dabf, type: 3}
     cost: 2
     stackable: 1
     sellable: 1
     plantObject: {fileID: 0}
+    isWard: 0
   - name: Teeth Seed
     itemSprite: {fileID: 21300000, guid: e3b4ec3518038134d84cf5a5072f0b67, type: 3}
     cost: 5
     stackable: 1
     sellable: 0
     plantObject: {fileID: 509843086781273102, guid: b50615ae26b7f8540ab67246670d52c7, type: 3}
+    isWard: 0
   - name: Bone Seed
     itemSprite: {fileID: 21300000, guid: c83440c00ed6b7447bfe7b36a917ca7c, type: 3}
     cost: 250
     stackable: 1
     sellable: 0
     plantObject: {fileID: 509843086781273102, guid: ff407fc15670cff409d98f905f8ee56f, type: 3}
+    isWard: 0
   - name: Eyeball Seed
     itemSprite: {fileID: 21300000, guid: 1f32c62afab045f40885ae51e47eaf6d, type: 3}
     cost: 10
     stackable: 1
     sellable: 0
     plantObject: {fileID: 509843086781273102, guid: a72b04db7dee50a4a999ddc4f531c31e, type: 3}
+    isWard: 0
   - name: Heart Seed
     itemSprite: {fileID: 21300000, guid: 1722e5de0ff2c8d47a67278ce102334a, type: 3}
     cost: 25
     stackable: 1
     sellable: 0
     plantObject: {fileID: 509843086781273102, guid: fed8fca17b7de5e408ca13d12606837a, type: 3}
+    isWard: 0
   - name: Brain Seed
     itemSprite: {fileID: 21300000, guid: 56a6b3aaef56b4e40bc4af261fbcabe3, type: 3}
     cost: 50
@@ -3756,18 +3771,28 @@ MonoBehaviour:
     stackable: 1
     sellable: 0
     plantObject: {fileID: 0}
+    isWard: 0
   - name: Blue Flame
     itemSprite: {fileID: 0}
     cost: 100
     stackable: 1
     sellable: 0
     plantObject: {fileID: 0}
+    isWard: 0
   - name: Zombie
     itemSprite: {fileID: 0}
     cost: 250
     stackable: 1
     sellable: 0
     plantObject: {fileID: 0}
+    isWard: 0
+  - name: Ward
+    itemSprite: {fileID: 21300000, guid: 0f533ee39ab1e7c4e94264b1e8ef3233, type: 3}
+    cost: 1
+    stackable: 1
+    sellable: 0
+    plantObject: {fileID: 0}
+    isWard: 1
 --- !u!1 &1266711896
 GameObject:
   m_ObjectHideFlags: 0
@@ -4347,6 +4372,7 @@ MonoBehaviour:
     stackable: 0
     sellable: 0
     plantObject: {fileID: 509843086781273102, guid: b50615ae26b7f8540ab67246670d52c7, type: 3}
+    isWard: 0
   bones:
     name: 
     itemSprite: {fileID: 21300000, guid: c83440c00ed6b7447bfe7b36a917ca7c, type: 3}
@@ -4354,6 +4380,7 @@ MonoBehaviour:
     stackable: 0
     sellable: 0
     plantObject: {fileID: 509843086781273102, guid: ff407fc15670cff409d98f905f8ee56f, type: 3}
+    isWard: 0
   eyeball:
     name: 
     itemSprite: {fileID: 21300000, guid: 1f32c62afab045f40885ae51e47eaf6d, type: 3}
@@ -4361,6 +4388,7 @@ MonoBehaviour:
     stackable: 0
     sellable: 0
     plantObject: {fileID: 509843086781273102, guid: a72b04db7dee50a4a999ddc4f531c31e, type: 3}
+    isWard: 0
   heart:
     name: 
     itemSprite: {fileID: 21300000, guid: 1722e5de0ff2c8d47a67278ce102334a, type: 3}
@@ -4368,6 +4396,7 @@ MonoBehaviour:
     stackable: 0
     sellable: 0
     plantObject: {fileID: 509843086781273102, guid: fed8fca17b7de5e408ca13d12606837a, type: 3}
+    isWard: 0
   brain:
     name: 
     itemSprite: {fileID: 21300000, guid: 56a6b3aaef56b4e40bc4af261fbcabe3, type: 3}
@@ -4389,6 +4418,7 @@ MonoBehaviour:
     stackable: 0
     sellable: 0
     plantObject: {fileID: 0}
+    isWard: 0
   _ashes:
     name: 
     itemSprite: {fileID: 21300000, guid: e4ae48e68adea4b4faf2c6c808dffacc, type: 3}
@@ -4396,6 +4426,7 @@ MonoBehaviour:
     stackable: 0
     sellable: 0
     plantObject: {fileID: 0}
+    isWard: 0
   _fire:
     name: 
     itemSprite: {fileID: 0}
@@ -4403,6 +4434,7 @@ MonoBehaviour:
     stackable: 0
     sellable: 0
     plantObject: {fileID: 0}
+    isWard: 0
   _zombie:
     name: 
     itemSprite: {fileID: 0}
@@ -4410,6 +4442,7 @@ MonoBehaviour:
     stackable: 0
     sellable: 0
     plantObject: {fileID: 0}
+    isWard: 0
 --- !u!224 &1474476518 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7686233198082952065, guid: ff407fc15670cff409d98f905f8ee56f, type: 3}
