@@ -13,4 +13,5 @@ public class Item
     public bool stackable = false; //can the item be stacked?   
     public bool sellable;
     public GameObject plantObject;
+    public bool isWard;
 }

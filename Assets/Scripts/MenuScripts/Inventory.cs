@@ -7,35 +7,36 @@ public class Inventory : MonoBehaviour
     public static Inventory singleton;
     public Item startingItem;
 
-    [Header("Slot Containers")]
-    public RectTransform inventorySlotsContainer;
+    [Header("Slot Containers")] public RectTransform inventorySlotsContainer;
     public RectTransform plantSlotsContainer;
     public RectTransform sellSlotsContainer;
-    
-    [Header("Slot Templates")]
-    public SlotTemplate slotTemplate;
+
+    [Header("Slot Templates")] public SlotTemplate slotTemplate;
     public SlotTemplate plantSlotTemplate;
 
-    [Header("Slot Lists")]
-    public SlotContainer[] inventorySlots;
+    [Header("Slot Lists")] public SlotContainer[] inventorySlots;
     public SlotContainer[] plantSlots;
     public SlotContainer[] sellSlots;
     public Item[] items; //array of all available items
 
-    SlotContainer selectedItemSlot = null;
+    private SlotContainer selectedItemSlot;
+
+    public SlotContainer SelectedItemSlot => selectedItemSlot;
 
     private void Start()
     {
         singleton = this;
 
         //sets up slot element template
-        plantSlotTemplate.container.rectTransform.pivot = new Vector2(0,1);
-        plantSlotTemplate.container.rectTransform.anchorMax = plantSlotTemplate.container.rectTransform.anchorMin = new Vector2(0,1);
+        plantSlotTemplate.container.rectTransform.pivot = new Vector2(0, 1);
+        plantSlotTemplate.container.rectTransform.anchorMax =
+            plantSlotTemplate.container.rectTransform.anchorMin = new Vector2(0, 1);
         plantSlotTemplate.gameObject.SetActive(false);
 
         //sets up plant slot template
-        slotTemplate.container.rectTransform.pivot = new Vector2(0,1);
-        slotTemplate.container.rectTransform.anchorMax = slotTemplate.container.rectTransform.anchorMin = new Vector2(0,1);
+        slotTemplate.container.rectTransform.pivot = new Vector2(0, 1);
+        slotTemplate.container.rectTransform.anchorMax =
+            slotTemplate.container.rectTransform.anchorMin = new Vector2(0, 1);
         slotTemplate.gameObject.SetActive(false);
 
         //initialize inventory slots
@@ -43,6 +44,8 @@ public class Inventory : MonoBehaviour
         UpdateItems(inventorySlots);
         inventorySlots[0].itemSprite = startingItem.itemSprite;
         inventorySlots[0].itemCount = 4;
+        inventorySlots[1].itemSprite = items[^1].itemSprite;
+        inventorySlots[1].itemCount = 5;
         UpdateItems(inventorySlots);
 
         //initialize plant slots
@@ -55,10 +58,12 @@ public class Inventory : MonoBehaviour
 
         //reset slot element template
         slotTemplate.container.rectTransform.pivot = new Vector2(0.5f, 0.5f);
-        slotTemplate.container.raycastTarget = slotTemplate.item.raycastTarget = slotTemplate.count.raycastTarget = false;
+        slotTemplate.container.raycastTarget =
+            slotTemplate.item.raycastTarget = slotTemplate.count.raycastTarget = false;
 
         plantSlotTemplate.container.rectTransform.pivot = new Vector2(0.5f, 0.5f);
-        plantSlotTemplate.container.raycastTarget = plantSlotTemplate.item.raycastTarget = plantSlotTemplate.count.raycastTarget = false;
+        plantSlotTemplate.container.raycastTarget =
+            plantSlotTemplate.item.raycastTarget = plantSlotTemplate.count.raycastTarget = false;
 
     }
 
@@ -89,21 +94,22 @@ public class Inventory : MonoBehaviour
 
         else
         {
-            if(slotTemplate.gameObject.activeSelf)
+            if (slotTemplate.gameObject.activeSelf)
             {
                 slotTemplate.gameObject.SetActive(false);
             }
         }
     }
 
-    private void InitilizeSlotTable(RectTransform container, SlotTemplate tempSlotTemplate, SlotContainer[] slots, int margin, int tempTableID)
+    private void InitilizeSlotTable(RectTransform container, SlotTemplate tempSlotTemplate, SlotContainer[] slots,
+        int margin, int tempTableID)
     {
         int resetIndex = 0;
         int tempRow = 0;
 
-        for(int i = 0; i < slots.Length; i++)
+        for (int i = 0; i < slots.Length; i++)
         {
-            if(slots[i] == null)
+            if (slots[i] == null)
             {
                 slots[i] = new SlotContainer();
             }
@@ -114,13 +120,15 @@ public class Inventory : MonoBehaviour
             slots[i].tableID = tempTableID;
 
             float tempX = (int)((margin + slots[i].slot.container.rectTransform.sizeDelta.x) * (i - resetIndex));
-            if( (tempX + slots[i].slot.container.rectTransform.sizeDelta.x + margin) > (container.rect.width) )
+            if ((tempX + slots[i].slot.container.rectTransform.sizeDelta.x + margin) > (container.rect.width))
             {
                 resetIndex = i;
                 tempRow++;
                 tempX = 0;
             }
-            slots[i].slot.container.rectTransform.anchoredPosition = new Vector2(margin + tempX, -margin - ( (margin + slots[i].slot.container.rectTransform.sizeDelta.y) * tempRow));
+
+            slots[i].slot.container.rectTransform.anchoredPosition = new Vector2(margin + tempX,
+                -margin - ((margin + slots[i].slot.container.rectTransform.sizeDelta.y) * tempRow));
 
         }
     }
@@ -128,21 +136,26 @@ public class Inventory : MonoBehaviour
     //updates table UI
     public void UpdateItems(SlotContainer[] slots)
     {
-        for(int i = 0; i < slots.Length; i++){
+        for (int i = 0; i < slots.Length; i++)
+        {
             Item slotItem = FindItem(slots[i].itemSprite);
-            
+
             //item in slot
-            if(slotItem != null){
-                if(!slotItem.stackable){
+            if (slotItem != null)
+            {
+                if (!slotItem.stackable)
+                {
                     slots[i].itemCount = 1;
                 }
 
                 //apply total item count
-                if(slots[i].itemCount > 1){
+                if (slots[i].itemCount > 1)
+                {
                     slots[i].slot.count.enabled = true;
                     slots[i].slot.count.text = slots[i].itemCount.ToString();
                 }
-                else{
+                else
+                {
                     slots[i].slot.count.enabled = false;
                 }
 
@@ -152,22 +165,26 @@ public class Inventory : MonoBehaviour
             }
 
             //no item in slot
-            else{
+            else
+            {
                 slots[i].slot.count.enabled = false;
                 slots[i].slot.item.enabled = false;
             }
         }
-    }   
+    }
 
     //finds item from the items list using sprite as reference
     public Item FindItem(Sprite sprite)
     {
-        if(!sprite){
+        if (!sprite)
+        {
             return null;
         }
-        
-        for(int i = 0; i < items.Length; i++){
-            if(items[i].itemSprite == sprite){
+
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i].itemSprite == sprite)
+            {
                 return items[i];
             }
         }
@@ -177,22 +194,28 @@ public class Inventory : MonoBehaviour
 
     private SlotContainer GetClickedSlot()
     {
-        for(int i = 0; i < inventorySlots.Length; i++){
-            if(inventorySlots[i].slot.hasClicked){
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            if (inventorySlots[i].slot.hasClicked)
+            {
                 inventorySlots[i].slot.hasClicked = false;
                 return inventorySlots[i];
             }
         }
 
-        for(int i = 0; i < plantSlots.Length; i++){
-            if(plantSlots[i].slot.hasClicked){
+        for (int i = 0; i < plantSlots.Length; i++)
+        {
+            if (plantSlots[i].slot.hasClicked)
+            {
                 plantSlots[i].slot.hasClicked = false;
                 return plantSlots[i];
             }
         }
 
-        for(int i = 0; i < sellSlots.Length; i++){
-            if(sellSlots[i].slot.hasClicked){
+        for (int i = 0; i < sellSlots.Length; i++)
+        {
+            if (sellSlots[i].slot.hasClicked)
+            {
                 sellSlots[i].slot.hasClicked = false;
                 return sellSlots[i];
             }
@@ -203,51 +226,70 @@ public class Inventory : MonoBehaviour
 
     public void ClickEventRecheck()
     {
-        if(selectedItemSlot == null){
+        if (selectedItemSlot == null)
+        {
             //gets clicked slot
             selectedItemSlot = GetClickedSlot();
-            if(selectedItemSlot != null){
-                if(selectedItemSlot.itemSprite != null){
-                    selectedItemSlot.slot.count.color = selectedItemSlot.slot.item.color = new Color(1, 1, 1, 0.5f); //changes color of slot
+            if (selectedItemSlot != null)
+            {
+                if (selectedItemSlot.itemSprite != null)
+                {
+                    selectedItemSlot.slot.count.color =
+                        selectedItemSlot.slot.item.color = new Color(1, 1, 1, 0.5f); //changes color of slot
                 }
-                else{
+                else
+                {
                     selectedItemSlot = null;
                 }
             }
         }
 
-        else{
+        else
+        {
             SlotContainer newClickedSlot = GetClickedSlot();
-            if(newClickedSlot != null){
+            if (newClickedSlot != null)
+            {
                 bool swapPositions = false;
                 bool releaseClick = true;
 
-                if(newClickedSlot != selectedItemSlot){ //inventory
+                if (newClickedSlot != selectedItemSlot)
+                {
+                    //inventory
                     //clicked on same table, different slots
-                    if(newClickedSlot.tableID == selectedItemSlot.tableID){
+                    if (newClickedSlot.tableID == selectedItemSlot.tableID)
+                    {
                         //check to see if the new clicked item is the same (stack if yes, else swap)
-                        if(newClickedSlot.itemSprite == selectedItemSlot.itemSprite){
+                        if (newClickedSlot.itemSprite == selectedItemSlot.itemSprite)
+                        {
                             Item slotItem = FindItem(selectedItemSlot.itemSprite);
                             //item is same and stackable
-                            if(slotItem.stackable){
+                            if (slotItem.stackable)
+                            {
                                 selectedItemSlot.itemSprite = null;
                                 newClickedSlot.itemCount += selectedItemSlot.itemCount;
                                 selectedItemSlot.itemCount = 0;
                             }
-                            else{
+                            else
+                            {
                                 swapPositions = true;
                             }
                         }
-                        else{
+                        else
+                        {
                             swapPositions = true;
                         }
                     }
-                    
-                    else{
+
+                    else
+                    {
                         //moving to different table
-                        if(newClickedSlot.tableID == 1){ //plant slot
-                        Debug.Log("planter");
-                            if(newClickedSlot.itemSprite == null){ //empty slot
+                        if (newClickedSlot.tableID == 1)
+                        {
+                            //plant slot
+                            Debug.Log("planter");
+                            if (newClickedSlot.itemSprite == null)
+                            {
+                                //empty slot
                                 Item slotItem = FindItem(selectedItemSlot.itemSprite);
                                 try
                                 {
@@ -260,44 +302,56 @@ public class Inventory : MonoBehaviour
                                 }
                                 catch (NullReferenceException e)
                                 {
-                                    Debug.Log("This item cannot be planted");
+
                                 }
                             }
                         }
-                        else if(newClickedSlot.tableID == 2){ //sell slot
+                        else if (newClickedSlot.tableID == 2)
+                        {
+                            //sell slot
                             Debug.Log("sell slot");
-                            if(newClickedSlot.itemSprite == selectedItemSlot.itemSprite){
+                            if (newClickedSlot.itemSprite == selectedItemSlot.itemSprite)
+                            {
                                 Item slotItem = FindItem(selectedItemSlot.itemSprite);
-                                if(slotItem.stackable){
+                                if (slotItem.stackable)
+                                {
                                     //item is the same and stackable
                                     selectedItemSlot.itemSprite = null;
                                     newClickedSlot.itemCount += selectedItemSlot.itemCount;
                                     selectedItemSlot.itemCount = 0;
                                 }
-                                else{
+                                else
+                                {
                                     swapPositions = true;
                                 }
                             }
 
-                            else{
+                            else
+                            {
                                 swapPositions = true;
                             }
                         }
 
-                        else{
-                            if(newClickedSlot.itemSprite == null || newClickedSlot.itemSprite == selectedItemSlot.itemSprite){
+                        else
+                        {
+                            if (newClickedSlot.itemSprite == null ||
+                                newClickedSlot.itemSprite == selectedItemSlot.itemSprite)
+                            {
                                 //adds one item from selectedItemSlot
                                 newClickedSlot.itemSprite = selectedItemSlot.itemSprite;
                                 newClickedSlot.itemCount++;
                                 selectedItemSlot.itemCount--;
-                                if(selectedItemSlot.itemCount <= 0){
+                                if (selectedItemSlot.itemCount <= 0)
+                                {
                                     selectedItemSlot.itemSprite = null;
                                 }
-                                else{
+                                else
+                                {
                                     releaseClick = false;
                                 }
                             }
-                            else{
+                            else
+                            {
                                 swapPositions = true;
                             }
                         }
@@ -305,7 +359,8 @@ public class Inventory : MonoBehaviour
                 }
 
                 //item swap
-                if(swapPositions){
+                if (swapPositions)
+                {
                     Sprite previousItemSprite = selectedItemSlot.itemSprite;
                     int previousItemCount = selectedItemSlot.itemCount;
 
@@ -317,7 +372,8 @@ public class Inventory : MonoBehaviour
                 }
 
                 //release mouse
-                if(releaseClick){
+                if (releaseClick)
+                {
                     selectedItemSlot.slot.count.color = selectedItemSlot.slot.item.color = Color.white;
                     selectedItemSlot = null;
                 }
@@ -333,16 +389,19 @@ public class Inventory : MonoBehaviour
     //adds item to inventory
     public void AddItem(GameObject obj)
     {
-        for(int i = 0; i < inventorySlots.Length; i++){
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
             //if item exists in inventory
-            if(inventorySlots[i].itemSprite == obj.GetComponent<Image>().sprite){
+            if (inventorySlots[i].itemSprite == obj.GetComponent<Image>().sprite)
+            {
                 inventorySlots[i].itemCount++;
                 UpdateItems(inventorySlots);
                 obj.SetActive(false);
                 return;
             }
             //if it does not exist in inventory
-            else if(inventorySlots[i].itemSprite == null){
+            else if (inventorySlots[i].itemSprite == null)
+            {
                 inventorySlots[i].itemSprite = obj.GetComponent<Image>().sprite;
                 inventorySlots[i].itemCount = 1;
                 UpdateItems(inventorySlots);
@@ -350,7 +409,8 @@ public class Inventory : MonoBehaviour
                 return;
             }
 
-            else{
+            else
+            {
                 Debug.Log("error");
             }
         }
@@ -360,22 +420,26 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(Image image)
     {
-        for(int i = 0; i < inventorySlots.Length; i++){
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
             //if item exists in inventory
-            if(inventorySlots[i].itemSprite == image.sprite){
+            if (inventorySlots[i].itemSprite == image.sprite)
+            {
                 inventorySlots[i].itemCount++;
                 UpdateItems(inventorySlots);
                 return;
             }
             //if it does not exist in inventory
-            else if(inventorySlots[i].itemSprite == null){
+            else if (inventorySlots[i].itemSprite == null)
+            {
                 inventorySlots[i].itemSprite = image.sprite;
                 inventorySlots[i].itemCount = 1;
                 UpdateItems(inventorySlots);
                 return;
             }
 
-            else{
+            else
+            {
                 Debug.Log("error");
             }
         }
