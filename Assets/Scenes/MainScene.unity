@@ -3705,20 +3705,6 @@ MonoBehaviour:
     sellable: 0
     plantObject: {fileID: 509843086781273102, guid: ac23364aff87fa14d951e375dc916cdd, type: 3}
     isWard: 0
-  - name: Scarecrow01
-    itemSprite: {fileID: 21300000, guid: 2eb46fcaf32c1474a8bcf76c4bf9c12b, type: 3}
-    cost: 75
-    stackable: 1
-    sellable: 0
-    plantObject: {fileID: 0}
-    isWard: 0
-  - name: Scarecrow02
-    itemSprite: {fileID: 21300000, guid: 35e15bf730aaf804fbcff9db1ec4e7aa, type: 3}
-    cost: 250
-    stackable: 1
-    sellable: 0
-    plantObject: {fileID: 0}
-    isWard: 0
   - name: Ashes
     itemSprite: {fileID: 21300000, guid: e4ae48e68adea4b4faf2c6c808dffacc, type: 3}
     cost: 30
@@ -3739,6 +3725,13 @@ MonoBehaviour:
     stackable: 1
     sellable: 0
     plantObject: {fileID: 0}
+    isWard: 0
+  - name: Scarecrow
+    itemSprite: {fileID: 21300000, guid: 2eb46fcaf32c1474a8bcf76c4bf9c12b, type: 3}
+    cost: 75
+    stackable: 1
+    sellable: 0
+    plantObject: {fileID: 4385070878154742895, guid: 1e20ade86c49e9744922e73119254f16, type: 3}
     isWard: 0
   - name: Ward
     itemSprite: {fileID: 21300000, guid: 0a50b4d317c1fdd4187c928586fba938, type: 3}
