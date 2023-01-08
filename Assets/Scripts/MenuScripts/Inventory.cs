@@ -46,7 +46,7 @@ public class Inventory : MonoBehaviour
         UpdateItems(inventorySlots);
 
         //initialize plant slots
-        InitilizeSlotTable(plantSlotsContainer, plantSlotTemplate, plantSlots, 16, 1);
+        InitilizeSlotTable(plantSlotsContainer, plantSlotTemplate, plantSlots, 120, 1);
         UpdateItems(plantSlots);
 
         //initialize sell slots
