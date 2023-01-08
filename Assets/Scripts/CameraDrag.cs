@@ -64,10 +64,10 @@ public class CameraDrag : MonoBehaviour
         Vector3 difference = mousePos - origin;
 
         //Pan camera if mouse is too far from center
-        if(difference.x < -150 || difference.x > 150 || difference.y < -80 || difference.y > 80)
+        if(difference.x < -180 || difference.x > 180 || difference.y < -100 || difference.y > 100)
         {
-            difference.x /= 10;
-            difference.y /= 10;
+            difference.x /= 20;
+            difference.y /= 20;
             
             cam.transform.position = ClampCamera(cam.transform.position + difference);
         }
