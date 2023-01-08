@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -85,20 +86,6 @@ public class Inventory : MonoBehaviour
             if(slotTemplate.gameObject.activeSelf)
             {
                 slotTemplate.gameObject.SetActive(false);
-            }
-        }
-
-        if (slotTemplate.gameObject.activeSelf && Input.GetMouseButtonDown(0))
-        {
-            Vector2 localMousePosition = inventorySlotsContainer.InverseTransformPoint(Input.mousePosition);
-            if (!inventorySlotsContainer.rect.Contains(localMousePosition))
-            {
-                // object is selected, mouse has been clicked, and mouse position is outside of Inventory UI
-                GameObject obj = FindItem(slotTemplate.item.sprite).plantObject;
-                if (obj != null)
-                {
-                    Instantiate(obj, Input.mousePosition, transform.rotation, transform.parent);
-                }
             }
         }
     }
@@ -256,10 +243,18 @@ public class Inventory : MonoBehaviour
                         Debug.Log("planter");
                             if(newClickedSlot.itemSprite == null){ //empty slot
                                 Item slotItem = FindItem(selectedItemSlot.itemSprite);
-                                Instantiate(slotItem.plantObject, newClickedSlot.slot.container.transform);
-                                selectedItemSlot.itemCount--;
-                                if(selectedItemSlot.itemCount <= 0){
-                                    selectedItemSlot.itemSprite = null;
+                                try
+                                {
+                                    Instantiate(slotItem.plantObject, newClickedSlot.slot.container.transform);
+                                    selectedItemSlot.itemCount--;
+                                    if (selectedItemSlot.itemCount <= 0)
+                                    {
+                                        selectedItemSlot.itemSprite = null;
+                                    }
+                                }
+                                catch (NullReferenceException e)
+                                {
+                                    Debug.Log("This item cannot be planted");
                                 }
                             }
                         }
