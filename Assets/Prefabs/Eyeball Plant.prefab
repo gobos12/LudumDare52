@@ -94,10 +94,10 @@ MonoBehaviour:
   timeToMoveStage: 2
   freshTime: 4
   durability: 2
-  baseValue: 0
   sprouting: {fileID: 21300000, guid: d09f001f7d20d4941b59af1bdaf8e322, type: 3}
   fresh: {fileID: 21300000, guid: b566c817b1b4d4b40a084935e7590f2d, type: 3}
   wilted: {fileID: 21300000, guid: 949fda1fd66ab8a4aba2bed408c916c4, type: 3}
+  ashes: {fileID: 5386793926197179644, guid: a06bd80bbe005ee4f83fce76012a1851, type: 3}
   seedSprite: {fileID: 21300000, guid: f42b33821dfad58428d742dc02b6d153, type: 3}
   grownSprite: {fileID: 21300000, guid: dcea1042200e04c099f0347af55b2fb2, type: 3}
   currentGhostState: 1
