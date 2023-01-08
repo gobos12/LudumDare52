@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 312615139016845870}
   m_Layer: 5
   m_Name: Heart Plant
-  m_TagString: Untagged
+  m_TagString: plant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,13 +92,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToMoveStage: 3
   freshTime: 3
-  durability: 0
+  durability: 1
   baseValue: 0
   sprouting: {fileID: 21300000, guid: ffae2cbcd9c54f042a81eea5db64a195, type: 3}
   fresh: {fileID: 21300000, guid: a8a078ef86d1ed34c9cbe05b6dc9a26f, type: 3}
   wilted: {fileID: 21300000, guid: a4f903a2456d5b045a406dc656e18dac, type: 3}
   seedSprite: {fileID: 21300000, guid: 9e2d2cb05aa5c6b49ba45b4184235c42, type: 3}
   grownSprite: {fileID: 21300000, guid: 83b10350b5e67fd48933d1794360775f, type: 3}
+  currentGhostState: 1
 --- !u!114 &312615139016845870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,18 +112,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed7f66584fd4f94d9898abceeb0d71a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onInteract:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2517800977483248605}
-        m_TargetAssemblyTypeName: BasePlant, Assembly-CSharp
-        m_MethodName: OnPointerClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2

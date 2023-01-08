@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 312615139016845870}
   m_Layer: 5
   m_Name: Eyeball Plant
-  m_TagString: Untagged
+  m_TagString: plant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,13 +92,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToMoveStage: 2
   freshTime: 4
-  durability: 0
+  durability: 2
   baseValue: 0
   sprouting: {fileID: 21300000, guid: d09f001f7d20d4941b59af1bdaf8e322, type: 3}
   fresh: {fileID: 21300000, guid: b566c817b1b4d4b40a084935e7590f2d, type: 3}
   wilted: {fileID: 21300000, guid: 949fda1fd66ab8a4aba2bed408c916c4, type: 3}
   seedSprite: {fileID: 21300000, guid: f42b33821dfad58428d742dc02b6d153, type: 3}
   grownSprite: {fileID: 21300000, guid: dcea1042200e04c099f0347af55b2fb2, type: 3}
+  currentGhostState: 1
 --- !u!114 &312615139016845870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,18 +112,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed7f66584fd4f94d9898abceeb0d71a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onInteract:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2517800977483248605}
-        m_TargetAssemblyTypeName: BasePlant, Assembly-CSharp
-        m_MethodName: OnPointerClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2

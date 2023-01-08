@@ -18,51 +18,83 @@ public class BasePlant : MonoBehaviour
     [SerializeField] private float durability;
     [SerializeField] private float baseValue;
 
-    [Header("Animation Sprites")]
+    [Header("Animation Sprites")] 
+    private Sprite seed;
     [SerializeField] private Sprite sprouting;
     [SerializeField] private Sprite fresh;
     [SerializeField] private Sprite wilted;
 
-    [Header("Inventory Sprites")] 
+    [Header("Inventory Sprites")]
     [SerializeField] private Sprite seedSprite;
     [SerializeField] private Sprite grownSprite;
-    
+
+    public enum GhostState
+    {
+        Protected, Unprotected, BeingEaten
+    }
+
+    [HideInInspector] public GhostState currentGhostState;
+    [HideInInspector] public GameObject ghost;
     
     private float quality;
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Interactable>().onInteract.AddListener((() =>
-        {
-            Inventory.singleton.AddItem(gameObject);
-        }));
+        seed = GetComponent<Image>().sprite;
     }
 
     // Update is called once per frame
     void Update()
     {
-        growthTimer += Time.deltaTime;
-        if (growthTimer > timeToMoveStage && currentStage < 2) // if perfect stage or wilted dont increment
+        if (GetComponent<Image>().sprite == wilted) currentGhostState = GhostState.Protected;
+        
+        if (currentGhostState != GhostState.BeingEaten)
         {
-            growthTimer = 0;
-            currentStage++;
-            switch (currentStage)
+            growthTimer += Time.deltaTime;
+            if (growthTimer > timeToMoveStage && currentStage < 2) // if perfect stage or wilted dont increment
             {
-                case 1:
-                    GetComponent<Image>().sprite = sprouting;
-                    break;
-                case 2:
-                    GetComponent<Image>().sprite = fresh;
-                    break;
+                growthTimer = 0;
+                currentStage++;
+                switch (currentStage)
+                {
+                    case 1:
+                        GetComponent<Image>().sprite = sprouting;
+                        break;
+                    case 2:
+                        GetComponent<Image>().sprite = fresh;
+                        break;
+                }
             }
-        } else if (currentStage == 2 && growthTimer > freshTime)
+            else if (currentStage == 2 && growthTimer > freshTime)
+            {
+                growthTimer = 0;
+                currentStage++;
+                GetComponent<Image>().sprite = wilted;
+            }
+        }
+        else
         {
-            growthTimer = 0;
-            currentStage++;
-            GetComponent<Image>().sprite = wilted;
+            growthTimer += Time.deltaTime / durability;
+            if (growthTimer > timeToMoveStage && currentStage > 0) // if perfect stage or wilted dont increment
+            {
+                growthTimer = 0;
+                currentStage--;
+                switch (currentStage)
+                {
+                    case 0:
+                        GetComponent<Image>().sprite = seed;
+                        break;
+                    case 1:
+                        GetComponent<Image>().sprite = sprouting;
+                        break;
+                    case 2:
+                        GetComponent<Image>().sprite = fresh;
+                        break;
+                }
+            }
         }
 
-        
+
     }
 
     public void OnPointerClick()
@@ -82,5 +114,10 @@ public class BasePlant : MonoBehaviour
     {
         if (currentStage == 3) return 0;
         return baseValue * (currentStage + 1) / 2;
+    }
+
+    private void OnDisable()
+    {
+        ghost.SetActive(false);
     }
 }

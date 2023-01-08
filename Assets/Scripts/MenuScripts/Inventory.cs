@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -242,10 +243,18 @@ public class Inventory : MonoBehaviour
                         Debug.Log("planter");
                             if(newClickedSlot.itemSprite == null){ //empty slot
                                 Item slotItem = FindItem(selectedItemSlot.itemSprite);
-                                Instantiate(slotItem.plantObject, newClickedSlot.slot.container.transform);
-                                selectedItemSlot.itemCount--;
-                                if(selectedItemSlot.itemCount <= 0){
-                                    selectedItemSlot.itemSprite = null;
+                                try
+                                {
+                                    Instantiate(slotItem.plantObject, newClickedSlot.slot.container.transform);
+                                    selectedItemSlot.itemCount--;
+                                    if (selectedItemSlot.itemCount <= 0)
+                                    {
+                                        selectedItemSlot.itemSprite = null;
+                                    }
+                                }
+                                catch (NullReferenceException e)
+                                {
+                                    Debug.Log("This item cannot be planted");
                                 }
                             }
                         }
