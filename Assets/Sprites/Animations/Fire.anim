@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BloodSplatter
+  m_Name: Fire
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,13 +20,13 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -2102413877, guid: da55da3d4189995408897a2c35ae121e, type: 3}
+      value: {fileID: 1664671096, guid: 1385e8f786257d54cb1f920cd59a7f66, type: 3}
     - time: 0.016666668
-      value: {fileID: 737481440, guid: da55da3d4189995408897a2c35ae121e, type: 3}
+      value: {fileID: 597126606, guid: 1385e8f786257d54cb1f920cd59a7f66, type: 3}
     - time: 0.033333335
-      value: {fileID: 1953472400, guid: da55da3d4189995408897a2c35ae121e, type: 3}
+      value: {fileID: -269536667, guid: 1385e8f786257d54cb1f920cd59a7f66, type: 3}
     - time: 0.05
-      value: {fileID: 2004135529, guid: da55da3d4189995408897a2c35ae121e, type: 3}
+      value: {fileID: -738195200, guid: 1385e8f786257d54cb1f920cd59a7f66, type: 3}
     attribute: m_Sprite
     path: 
     classID: 114
@@ -46,10 +46,10 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -2102413877, guid: da55da3d4189995408897a2c35ae121e, type: 3}
-    - {fileID: 737481440, guid: da55da3d4189995408897a2c35ae121e, type: 3}
-    - {fileID: 1953472400, guid: da55da3d4189995408897a2c35ae121e, type: 3}
-    - {fileID: 2004135529, guid: da55da3d4189995408897a2c35ae121e, type: 3}
+    - {fileID: 1664671096, guid: 1385e8f786257d54cb1f920cd59a7f66, type: 3}
+    - {fileID: 597126606, guid: 1385e8f786257d54cb1f920cd59a7f66, type: 3}
+    - {fileID: -269536667, guid: 1385e8f786257d54cb1f920cd59a7f66, type: 3}
+    - {fileID: -738195200, guid: 1385e8f786257d54cb1f920cd59a7f66, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

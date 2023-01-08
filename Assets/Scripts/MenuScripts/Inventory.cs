@@ -19,13 +19,15 @@ public class Inventory : MonoBehaviour
     public SlotContainer[] sellSlots;
     public Item[] items; //array of all available items
 
-    private SlotContainer selectedItemSlot;
+    private System.Random rnd;
 
+    private SlotContainer selectedItemSlot;
     public SlotContainer SelectedItemSlot => selectedItemSlot;
 
     private void Start()
     {
         singleton = this;
+        rnd = new System.Random();
 
         //sets up slot element template
         plantSlotTemplate.container.rectTransform.pivot = new Vector2(0, 1);
@@ -393,29 +395,31 @@ public class Inventory : MonoBehaviour
     //adds item to inventory
     public void AddItem(GameObject obj)
     {
-        for (int i = 0; i < inventorySlots.Length; i++)
-        {
-            //if item exists in inventory
-            if (inventorySlots[i].itemSprite == obj.GetComponent<Image>().sprite)
-            {
-                inventorySlots[i].itemCount++;
-                UpdateItems(inventorySlots);
-                obj.SetActive(false);
-                return;
-            }
-            //if it does not exist in inventory
-            else if (inventorySlots[i].itemSprite == null)
-            {
-                inventorySlots[i].itemSprite = obj.GetComponent<Image>().sprite;
-                inventorySlots[i].itemCount = 1;
-                UpdateItems(inventorySlots);
-                obj.SetActive(false);
-                return;
-            }
-
-            else
-            {
-                Debug.Log("error");
+        var type = obj.GetComponent<BasePlant>();
+        Debug.Log(type.name);
+        for(int i = 0; i < inventorySlots.Length; i++){
+            if(type != null){
+                //if item exists in inventory
+                if(inventorySlots[i].itemSprite == obj.GetComponent<Image>().sprite){
+                    if(type.name == "Teeth") inventorySlots[i].itemCount = rnd.Next(3, 6); //chooses a random value between 3 and 5
+                    else if(type.name == "Bone") inventorySlots[i].itemCount = rnd.Next(2, 5);
+                    else if(type.name == "Eyeball") inventorySlots[i].itemCount = 2;
+                    else inventorySlots[i].itemCount = 1;
+                    UpdateItems(inventorySlots);
+                    obj.SetActive(false);
+                    return;
+                }
+                //if it does not exist in inventory
+                else if(inventorySlots[i].itemSprite == null){
+                    inventorySlots[i].itemSprite = obj.GetComponent<Image>().sprite;
+                    if(type.name == "Teeth") inventorySlots[i].itemCount = rnd.Next(3, 6); //chooses a random value between 3 and 5
+                    else if(type.name == "Bone") inventorySlots[i].itemCount = rnd.Next(2, 5);
+                    else if(type.name == "Eyeball") inventorySlots[i].itemCount = 2;
+                    else inventorySlots[i].itemCount = 1;
+                    UpdateItems(inventorySlots);
+                    obj.SetActive(false);
+                    return;
+                }
             }
         }
 
@@ -440,11 +444,6 @@ public class Inventory : MonoBehaviour
                 inventorySlots[i].itemCount = 1;
                 UpdateItems(inventorySlots);
                 return;
-            }
-
-            else
-            {
-                Debug.Log("error");
             }
         }
     }
