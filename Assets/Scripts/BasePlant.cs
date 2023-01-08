@@ -16,7 +16,6 @@ public class BasePlant : MonoBehaviour
     private int currentStage = 0;
     [SerializeField] private float freshTime;
     [SerializeField] private float durability;
-    [SerializeField] private float baseValue;
 
     [Header("Animation Sprites")] 
     private Sprite seed;
@@ -99,21 +98,23 @@ public class BasePlant : MonoBehaviour
 
     public void OnPointerClick()
     {
-        // calculate value, add to inventory
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (currentStage == 2 && currentGhostState != GhostState.BeingEaten)
         {
-            GetComponent<Image>().sprite = seedSprite;
+            Inventory.singleton.AddItem(gameObject);
         }
-        else
-        {
-            GetComponent<Image>().sprite = grownSprite;
-        }
-    }
 
-    private float GetItemValue()
-    {
-        if (currentStage == 3) return 0;
-        return baseValue * (currentStage + 1) / 2;
+        try
+        {
+            if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).isWard)
+            {
+                ghost.SetActive(false);
+                currentGhostState = GhostState.Unprotected;
+                Inventory.singleton.SelectedItemSlot.itemCount--;
+            }
+        }
+        catch (NullReferenceException e)
+        {
+        }
     }
 
     private void OnDisable()

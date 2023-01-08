@@ -11,7 +11,7 @@ public class Interactable : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         gameObject.GetComponent<BasePlant>().OnPointerClick();
-        Inventory.singleton.AddItem(gameObject);
+        //Inventory.singleton.AddItem(gameObject);
     }
 
 }
