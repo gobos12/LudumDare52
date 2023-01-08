@@ -5,15 +5,18 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     public static Inventory singleton;
+    public Item startingItem;
 
+    [Header("Slot Containers")]
     public RectTransform inventorySlotsContainer;
     public RectTransform plantSlotsContainer;
     public RectTransform sellSlotsContainer;
     
-    //templates
+    [Header("Slot Templates")]
     public SlotTemplate slotTemplate;
     public SlotTemplate plantSlotTemplate;
 
+    [Header("Slot Lists")]
     public SlotContainer[] inventorySlots;
     public SlotContainer[] plantSlots;
     public SlotContainer[] sellSlots;
@@ -37,6 +40,9 @@ public class Inventory : MonoBehaviour
 
         //initialize inventory slots
         InitilizeSlotTable(inventorySlotsContainer, slotTemplate, inventorySlots, 32, 0);
+        UpdateItems(inventorySlots);
+        inventorySlots[0].itemSprite = startingItem.itemSprite;
+        inventorySlots[0].itemCount = 4;
         UpdateItems(inventorySlots);
 
         //initialize plant slots
@@ -120,7 +126,7 @@ public class Inventory : MonoBehaviour
     }
 
     //updates table UI
-    private void UpdateItems(SlotContainer[] slots)
+    public void UpdateItems(SlotContainer[] slots)
     {
         for(int i = 0; i < slots.Length; i++){
             Item slotItem = FindItem(slots[i].itemSprite);
@@ -154,7 +160,7 @@ public class Inventory : MonoBehaviour
     }   
 
     //finds item from the items list using sprite as reference
-    private Item FindItem(Sprite sprite)
+    public Item FindItem(Sprite sprite)
     {
         if(!sprite){
             return null;
@@ -352,9 +358,33 @@ public class Inventory : MonoBehaviour
         //insert code for what to do when there is no more space in inventory
     }
 
-    public void RemoveItem()
+    public void AddItem(Image image)
     {
-        
+        for(int i = 0; i < inventorySlots.Length; i++){
+            //if item exists in inventory
+            if(inventorySlots[i].itemSprite == image.sprite){
+                inventorySlots[i].itemCount++;
+                UpdateItems(inventorySlots);
+                return;
+            }
+            //if it does not exist in inventory
+            else if(inventorySlots[i].itemSprite == null){
+                inventorySlots[i].itemSprite = image.sprite;
+                inventorySlots[i].itemCount = 1;
+                UpdateItems(inventorySlots);
+                return;
+            }
+
+            else{
+                Debug.Log("error");
+            }
+        }
+    }
+
+    public void RemoveItem(SlotContainer s)
+    {
+        s.itemSprite = null;
+        s.itemCount = 0;
     }
     
 }

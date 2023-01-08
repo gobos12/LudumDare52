@@ -9,6 +9,8 @@ public class Menus : MonoBehaviour
     public Button inventoryButton;
     public Button closeInventoryButton;
     public Button marketButton;
+    //public Button buyButton; //tobe called in black market script
+    public Button sellButton;
 
     [Header("Menus")]
     public GameObject inventoryMenu;
@@ -46,6 +48,22 @@ public class Menus : MonoBehaviour
                 //menus
                 inventoryMenu.gameObject.SetActive(true);
                 marketMenu.gameObject.SetActive(true);
+            }
+        );
+
+        sellButton.onClick.AddListener(delegate
+            {
+                for(int i = 0; i < Inventory.singleton.sellSlots.Length; i++){
+                    //removes all items from inventory IF it is sellable
+                    Item item = Inventory.singleton.FindItem(Inventory.singleton.sellSlots[i].itemSprite);
+                    if(item != null){
+                        if(item.sellable){
+                            Currency.singleton.AddMoney(item.cost * Inventory.singleton.sellSlots[i].itemCount);
+                            Inventory.singleton.RemoveItem(Inventory.singleton.sellSlots[i]);
+                            Inventory.singleton.UpdateItems(Inventory.singleton.sellSlots);
+                        }
+                    }
+                }
             }
         );
     }

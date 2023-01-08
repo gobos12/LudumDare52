@@ -1120,8 +1120,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.3072, y: 5.0234}
-  m_SizeDelta: {x: 114.4164, y: 89.9532}
+  m_AnchoredPosition: {x: -1.6764, y: -0.000013828}
+  m_SizeDelta: {x: 129.04, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &624201714
 MonoBehaviour:
@@ -1170,8 +1170,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1350,8 +1350,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -92.45062, y: 0}
-  m_SizeDelta: {x: 71.0987, y: 100}
+  m_AnchoredPosition: {x: -103.09757, y: 0}
+  m_SizeDelta: {x: 73.8058, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &705915616
 MonoBehaviour:
@@ -2766,8 +2766,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1224, y: -13}
-  m_SizeDelta: {x: 256, y: 100}
+  m_AnchoredPosition: {x: -1214.7069, y: -13}
+  m_SizeDelta: {x: 280, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1157016603
 MonoBehaviour:
@@ -2940,8 +2940,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 92.168465, y: 0}
-  m_SizeDelta: {x: 71.6631, y: 100}
+  m_AnchoredPosition: {x: 101.42056, y: 0}
+  m_SizeDelta: {x: 77.1579, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1172636853
 MonoBehaviour:
@@ -3244,6 +3244,7 @@ MonoBehaviour:
   inventoryButton: {fileID: 961294207}
   closeInventoryButton: {fileID: 754299772}
   marketButton: {fileID: 1923060702}
+  sellButton: {fileID: 84749794}
   inventoryMenu: {fileID: 1076048080}
   marketMenu: {fileID: 1474823835}
 --- !u!114 &1263855227
@@ -3258,6 +3259,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ebcd88822b1fe42bf3001b2ec5c211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingItem:
+    name: Teeth Seed
+    itemSprite: {fileID: 21300000, guid: e3b4ec3518038134d84cf5a5072f0b67, type: 3}
+    cost: 0
+    stackable: 1
+    sellable: 0
+    plantObject: {fileID: 509843086781273102, guid: b50615ae26b7f8540ab67246670d52c7, type: 3}
   inventorySlotsContainer: {fileID: 1076048081}
   plantSlotsContainer: {fileID: 819559092}
   sellSlotsContainer: {fileID: 1604507043}
@@ -3355,35 +3363,119 @@ MonoBehaviour:
     tableID: 0
     slot: {fileID: 0}
   items:
-  - itemSprite: {fileID: 21300000, guid: f42b33821dfad58428d742dc02b6d153, type: 3}
+  - name: Eyball Inventory Sprite
+    itemSprite: {fileID: 21300000, guid: f42b33821dfad58428d742dc02b6d153, type: 3}
+    cost: 5
     stackable: 1
+    sellable: 1
     plantObject: {fileID: 509843086781273102, guid: a72b04db7dee50a4a999ddc4f531c31e, type: 3}
-  - itemSprite: {fileID: 21300000, guid: dcea1042200e04c099f0347af55b2fb2, type: 3}
+  - name: Grown Eyeball
+    itemSprite: {fileID: 21300000, guid: dcea1042200e04c099f0347af55b2fb2, type: 3}
+    cost: 5
     stackable: 1
+    sellable: 1
     plantObject: {fileID: 0}
-  - itemSprite: {fileID: 21300000, guid: 8d8b450e9e92b994f9bd469bba4a6f8c, type: 3}
+  - name: Bone Inventory Sprite
+    itemSprite: {fileID: 21300000, guid: 8d8b450e9e92b994f9bd469bba4a6f8c, type: 3}
+    cost: 2
     stackable: 1
+    sellable: 1
     plantObject: {fileID: 509843086781273102, guid: ff407fc15670cff409d98f905f8ee56f, type: 3}
-  - itemSprite: {fileID: 21300000, guid: bc57e2ef235eaef4f940bc0e74e5b964, type: 3}
+  - name: Grown Bone
+    itemSprite: {fileID: 21300000, guid: bc57e2ef235eaef4f940bc0e74e5b964, type: 3}
+    cost: 2
     stackable: 1
+    sellable: 1
     plantObject: {fileID: 0}
-  - itemSprite: {fileID: 21300000, guid: 1e18b2ac355dec84482ba7d873a87b16, type: 3}
+  - name: Brain Inventory Sprite
+    itemSprite: {fileID: 21300000, guid: 1e18b2ac355dec84482ba7d873a87b16, type: 3}
+    cost: 25
     stackable: 1
+    sellable: 1
     plantObject: {fileID: 509843086781273102, guid: ac23364aff87fa14d951e375dc916cdd, type: 3}
-  - itemSprite: {fileID: 21300000, guid: c5cba9eca83b054419e00aa8007453cf, type: 3}
+  - name: Grown Brain
+    itemSprite: {fileID: 21300000, guid: c5cba9eca83b054419e00aa8007453cf, type: 3}
+    cost: 25
     stackable: 1
+    sellable: 1
     plantObject: {fileID: 0}
-  - itemSprite: {fileID: 21300000, guid: 9e2d2cb05aa5c6b49ba45b4184235c42, type: 3}
+  - name: Heart Inventory Sprite
+    itemSprite: {fileID: 21300000, guid: 9e2d2cb05aa5c6b49ba45b4184235c42, type: 3}
+    cost: 12
     stackable: 1
+    sellable: 1
     plantObject: {fileID: 509843086781273102, guid: fed8fca17b7de5e408ca13d12606837a, type: 3}
-  - itemSprite: {fileID: 21300000, guid: 83b10350b5e67fd48933d1794360775f, type: 3}
+  - name: Grown Heart
+    itemSprite: {fileID: 21300000, guid: 83b10350b5e67fd48933d1794360775f, type: 3}
+    cost: 12
     stackable: 1
+    sellable: 1
     plantObject: {fileID: 0}
-  - itemSprite: {fileID: 21300000, guid: e0f293dc4b5e20c4992dfe244ab12f36, type: 3}
+  - name: Teeth Inventory Sprite
+    itemSprite: {fileID: 21300000, guid: e0f293dc4b5e20c4992dfe244ab12f36, type: 3}
+    cost: 2
     stackable: 1
+    sellable: 1
     plantObject: {fileID: 509843086781273102, guid: b50615ae26b7f8540ab67246670d52c7, type: 3}
-  - itemSprite: {fileID: 21300000, guid: 73f24037d0b8a8b45a1137a080815bff, type: 3}
+  - name: Grown Teeth
+    itemSprite: {fileID: 21300000, guid: 73f24037d0b8a8b45a1137a080815bff, type: 3}
+    cost: 2
     stackable: 1
+    sellable: 1
+    plantObject: {fileID: 0}
+  - name: Teeth Seed
+    itemSprite: {fileID: 21300000, guid: e3b4ec3518038134d84cf5a5072f0b67, type: 3}
+    cost: 5
+    stackable: 1
+    sellable: 0
+    plantObject: {fileID: 509843086781273102, guid: b50615ae26b7f8540ab67246670d52c7, type: 3}
+  - name: Bone Seed
+    itemSprite: {fileID: 21300000, guid: c83440c00ed6b7447bfe7b36a917ca7c, type: 3}
+    cost: 250
+    stackable: 1
+    sellable: 0
+    plantObject: {fileID: 509843086781273102, guid: ff407fc15670cff409d98f905f8ee56f, type: 3}
+  - name: Eyeball Seed
+    itemSprite: {fileID: 21300000, guid: 1f32c62afab045f40885ae51e47eaf6d, type: 3}
+    cost: 10
+    stackable: 1
+    sellable: 0
+    plantObject: {fileID: 509843086781273102, guid: a72b04db7dee50a4a999ddc4f531c31e, type: 3}
+  - name: Heart Seed
+    itemSprite: {fileID: 21300000, guid: 1722e5de0ff2c8d47a67278ce102334a, type: 3}
+    cost: 25
+    stackable: 1
+    sellable: 0
+    plantObject: {fileID: 509843086781273102, guid: fed8fca17b7de5e408ca13d12606837a, type: 3}
+  - name: Brain Seed
+    itemSprite: {fileID: 21300000, guid: 56a6b3aaef56b4e40bc4af261fbcabe3, type: 3}
+    cost: 50
+    stackable: 1
+    sellable: 0
+    plantObject: {fileID: 509843086781273102, guid: ac23364aff87fa14d951e375dc916cdd, type: 3}
+  - name: Scarecrow
+    itemSprite: {fileID: 0}
+    cost: 75
+    stackable: 1
+    sellable: 0
+    plantObject: {fileID: 0}
+  - name: Ashes
+    itemSprite: {fileID: 0}
+    cost: 30
+    stackable: 1
+    sellable: 0
+    plantObject: {fileID: 0}
+  - name: Blue Flame
+    itemSprite: {fileID: 0}
+    cost: 100
+    stackable: 1
+    sellable: 0
+    plantObject: {fileID: 0}
+  - name: Zombie
+    itemSprite: {fileID: 0}
+    cost: 250
+    stackable: 1
+    sellable: 0
     plantObject: {fileID: 0}
 --- !u!1 &1266711896
 GameObject:
@@ -3902,7 +3994,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: -0.000030517578}
+  m_AnchoredPosition: {x: -0.00012207031, y: -0.000030517578}
   m_SizeDelta: {x: -134.75491, y: 32}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1449078022
@@ -3939,7 +4031,7 @@ MonoBehaviour:
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 1
-  m_CellSize: {x: 256, y: 100}
+  m_CellSize: {x: 280, y: 100}
   m_Spacing: {x: 32, y: 32}
   m_Constraint: 1
   m_ConstraintCount: 1
@@ -3956,7 +4048,70 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1157016605}
-  count: 10
+  count: 8
+  teeth:
+    name: 
+    itemSprite: {fileID: 21300000, guid: e3b4ec3518038134d84cf5a5072f0b67, type: 3}
+    cost: 0
+    stackable: 0
+    sellable: 0
+    plantObject: {fileID: 509843086781273102, guid: b50615ae26b7f8540ab67246670d52c7, type: 3}
+  bones:
+    name: 
+    itemSprite: {fileID: 21300000, guid: c83440c00ed6b7447bfe7b36a917ca7c, type: 3}
+    cost: 0
+    stackable: 0
+    sellable: 0
+    plantObject: {fileID: 509843086781273102, guid: ff407fc15670cff409d98f905f8ee56f, type: 3}
+  eyeball:
+    name: 
+    itemSprite: {fileID: 21300000, guid: 1f32c62afab045f40885ae51e47eaf6d, type: 3}
+    cost: 0
+    stackable: 0
+    sellable: 0
+    plantObject: {fileID: 509843086781273102, guid: a72b04db7dee50a4a999ddc4f531c31e, type: 3}
+  heart:
+    name: 
+    itemSprite: {fileID: 21300000, guid: 1722e5de0ff2c8d47a67278ce102334a, type: 3}
+    cost: 0
+    stackable: 0
+    sellable: 0
+    plantObject: {fileID: 509843086781273102, guid: fed8fca17b7de5e408ca13d12606837a, type: 3}
+  brain:
+    name: 
+    itemSprite: {fileID: 21300000, guid: 56a6b3aaef56b4e40bc4af261fbcabe3, type: 3}
+    cost: 0
+    stackable: 0
+    sellable: 0
+    plantObject: {fileID: 509843086781273102, guid: ac23364aff87fa14d951e375dc916cdd, type: 3}
+  _scarecrow:
+    name: 
+    itemSprite: {fileID: 0}
+    cost: 0
+    stackable: 0
+    sellable: 0
+    plantObject: {fileID: 0}
+  _ashes:
+    name: 
+    itemSprite: {fileID: 0}
+    cost: 0
+    stackable: 0
+    sellable: 0
+    plantObject: {fileID: 0}
+  _fire:
+    name: 
+    itemSprite: {fileID: 0}
+    cost: 0
+    stackable: 0
+    sellable: 0
+    plantObject: {fileID: 0}
+  _zombie:
+    name: 
+    itemSprite: {fileID: 0}
+    cost: 0
+    stackable: 0
+    sellable: 0
+    plantObject: {fileID: 0}
 --- !u!224 &1474476518 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7686233198082952065, guid: ff407fc15670cff409d98f905f8ee56f, type: 3}
@@ -4898,7 +5053,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1561041094}
   m_HandleRect: {fileID: 1561041093}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
