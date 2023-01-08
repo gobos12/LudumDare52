@@ -118,6 +118,6 @@ public class BasePlant : MonoBehaviour
 
     private void OnDisable()
     {
-        ghost.SetActive(false);
+        if (ghost != null) ghost.SetActive(false);
     }
 }
