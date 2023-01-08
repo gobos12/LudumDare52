@@ -7,6 +7,7 @@ public class Inventory : MonoBehaviour
 
     public RectTransform inventorySlotsContainer;
     public RectTransform plantSlotsContainer;
+    public RectTransform sellSlotsContainer;
     
     //templates
     public SlotTemplate slotTemplate;
@@ -14,6 +15,7 @@ public class Inventory : MonoBehaviour
 
     public SlotContainer[] inventorySlots;
     public SlotContainer[] plantSlots;
+    public SlotContainer[] sellSlots;
     public Item[] items; //array of all available items
 
     SlotContainer selectedItemSlot = null;
@@ -33,12 +35,16 @@ public class Inventory : MonoBehaviour
         slotTemplate.gameObject.SetActive(false);
 
         //initialize inventory slots
-        InitilizeSlotTable(inventorySlotsContainer, slotTemplate, inventorySlots, 16, 0);
+        InitilizeSlotTable(inventorySlotsContainer, slotTemplate, inventorySlots, 32, 0);
         UpdateItems(inventorySlots);
 
         //initialize plant slots
         InitilizeSlotTable(plantSlotsContainer, plantSlotTemplate, plantSlots, 16, 1);
         UpdateItems(plantSlots);
+
+        //initialize sell slots
+        InitilizeSlotTable(sellSlotsContainer, slotTemplate, sellSlots, 16, 2);
+        UpdateItems(sellSlots);
 
         //reset slot element template
         slotTemplate.container.rectTransform.pivot = new Vector2(0.5f, 0.5f);
@@ -82,19 +88,19 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        // if (slotTemplate.gameObject.activeSelf && Input.GetMouseButtonDown(0))
-        // {
-        //     Vector2 localMousePosition = inventorySlotsContainer.InverseTransformPoint(Input.mousePosition);
-        //     if (!inventorySlotsContainer.rect.Contains(localMousePosition))
-        //     {
-        //         // object is selected, mouse has been clicked, and mouse position is outside of Inventory UI
-        //         GameObject obj = FindItem(slotTemplate.item.sprite).plantObject;
-        //         if (obj != null)
-        //         {
-        //             Instantiate(obj, Input.mousePosition, transform.rotation, transform.parent);
-        //         }
-        //     }
-        // }
+        if (slotTemplate.gameObject.activeSelf && Input.GetMouseButtonDown(0))
+        {
+            Vector2 localMousePosition = inventorySlotsContainer.InverseTransformPoint(Input.mousePosition);
+            if (!inventorySlotsContainer.rect.Contains(localMousePosition))
+            {
+                // object is selected, mouse has been clicked, and mouse position is outside of Inventory UI
+                GameObject obj = FindItem(slotTemplate.item.sprite).plantObject;
+                if (obj != null)
+                {
+                    Instantiate(obj, Input.mousePosition, transform.rotation, transform.parent);
+                }
+            }
+        }
     }
 
     private void InitilizeSlotTable(RectTransform container, SlotTemplate tempSlotTemplate, SlotContainer[] slots, int margin, int tempTableID)
@@ -192,6 +198,13 @@ public class Inventory : MonoBehaviour
             }
         }
 
+        for(int i = 0; i < sellSlots.Length; i++){
+            if(sellSlots[i].slot.hasClicked){
+                sellSlots[i].slot.hasClicked = false;
+                return sellSlots[i];
+            }
+        }
+
         return null;
     }
 
@@ -216,7 +229,7 @@ public class Inventory : MonoBehaviour
                 bool swapPositions = false;
                 bool releaseClick = true;
 
-                if(newClickedSlot != selectedItemSlot){
+                if(newClickedSlot != selectedItemSlot){ //inventory
                     //clicked on same table, different slots
                     if(newClickedSlot.tableID == selectedItemSlot.tableID){
                         //check to see if the new clicked item is the same (stack if yes, else swap)
@@ -236,61 +249,57 @@ public class Inventory : MonoBehaviour
                             swapPositions = true;
                         }
                     }
-                    //moving to different table
+                    
                     else{
-                        if(newClickedSlot.tableID == 1){ //plant table
-                            GameObject obj = FindItem(slotTemplate.item.sprite).plantObject;
-                            Debug.Log(obj);
-                            Instantiate(obj, newClickedSlot.slot.item.gameObject.GetComponent<RectTransform>().position, transform.rotation, transform.parent);
-                            selectedItemSlot.itemCount--;
+                        //moving to different table
+                        if(newClickedSlot.tableID == 1){ //plant slot
+                        Debug.Log("planter");
+                            if(newClickedSlot.itemSprite == null){ //empty slot
+                                Item slotItem = FindItem(selectedItemSlot.itemSprite);
+                                Instantiate(slotItem.plantObject, newClickedSlot.slot.container.transform);
+                                selectedItemSlot.itemCount--;
+                                if(selectedItemSlot.itemCount <= 0){
+                                    selectedItemSlot.itemSprite = null;
+                                }
+                            }
+                        }
+                        else if(newClickedSlot.tableID == 2){ //sell slot
+                            Debug.Log("sell slot");
+                            if(newClickedSlot.itemSprite == selectedItemSlot.itemSprite){
+                                Item slotItem = FindItem(selectedItemSlot.itemSprite);
+                                if(slotItem.stackable){
+                                    //item is the same and stackable
+                                    selectedItemSlot.itemSprite = null;
+                                    newClickedSlot.itemCount += selectedItemSlot.itemCount;
+                                    selectedItemSlot.itemCount = 0;
+                                }
+                                else{
+                                    swapPositions = true;
+                                }
+                            }
 
+                            else{
+                                swapPositions = true;
+                            }
                         }
 
-                        // if (slotTemplate.gameObject.activeSelf && Input.GetMouseButtonDown(0))
-                        // {
-                        //     Vector2 localMousePosition = inventorySlotsContainer.InverseTransformPoint(Input.mousePosition);
-                        //     if (!inventorySlotsContainer.rect.Contains(localMousePosition))
-                        //     {
-                        //         // object is selected, mouse has been clicked, and mouse position is outside of Inventory UI
-                        //         GameObject obj = FindItem(slotTemplate.item.sprite).plantObject;
-                        //         if (obj != null)
-                        //         {
-                        //             Instantiate(obj, Input.mousePosition, transform.rotation, transform.parent);
-                        //         }
-                        //     }
-                        // }
-                        
-                        // if(newClickedSlot.itemSprite == selectedItemSlot.itemSprite){
-                        //     Item slotItem = FindItem(selectedItemSlot.itemSprite);
-                        //     if(slotItem.stackable){
-                        //         //item is the same and stackable
-                        //         selectedItemSlot.itemSprite = null;
-                        //         newClickedSlot.itemCount += selectedItemSlot.itemCount;
-                        //         selectedItemSlot.itemCount = 0;
-                        //     }
-                        //     else{
-                        //         swapPositions = true;
-                        //     }
-                        // }
-                        // else{
-                        //     if(newClickedSlot.itemSprite == null || newClickedSlot.itemSprite == selectedItemSlot.itemSprite){
-                        //         Debug.Log("moved to new table");
-                        //         //add one item from selectedItemSlot
-                        //         newClickedSlot.itemSprite = selectedItemSlot.itemSprite;
-                        //         newClickedSlot.itemCount++;
-                        //         selectedItemSlot.itemCount--;
-                        //         if(selectedItemSlot.itemCount <= 0){
-                        //             //placed last item
-                        //             selectedItemSlot.itemSprite = null;
-                        //         }
-                        //         else{
-                        //             releaseClick = false;
-                        //         }
-                        //     }
-                        //     else{
-                        //         swapPositions = true;
-                        //     }
-                        // }
+                        else{
+                            if(newClickedSlot.itemSprite == null || newClickedSlot.itemSprite == selectedItemSlot.itemSprite){
+                                //adds one item from selectedItemSlot
+                                newClickedSlot.itemSprite = selectedItemSlot.itemSprite;
+                                newClickedSlot.itemCount++;
+                                selectedItemSlot.itemCount--;
+                                if(selectedItemSlot.itemCount <= 0){
+                                    selectedItemSlot.itemSprite = null;
+                                }
+                                else{
+                                    releaseClick = false;
+                                }
+                            }
+                            else{
+                                swapPositions = true;
+                            }
+                        }
                     }
                 }
 
@@ -314,6 +323,8 @@ public class Inventory : MonoBehaviour
 
                 //Update UI
                 UpdateItems(inventorySlots);
+                UpdateItems(plantSlots);
+                UpdateItems(sellSlots);
             }
         }
     }

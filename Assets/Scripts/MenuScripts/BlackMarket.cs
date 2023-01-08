@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class BlackMarket : MonoBehaviour
 {
-    public GameObject prefab;
+    public BuySlotTemplate prefab;
     public int count;
 
     private void Start()
     {
-        GameObject newObject;
         for(int i = 0; i < count; i++){
-            newObject = (GameObject)Instantiate(prefab, transform);
+            Instantiate(prefab, transform);
         }
     }
 }
