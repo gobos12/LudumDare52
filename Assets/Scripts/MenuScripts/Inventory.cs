@@ -6,9 +6,14 @@ public class Inventory : MonoBehaviour
     public static Inventory singleton;
 
     public RectTransform inventorySlotsContainer;
+    public RectTransform plantSlotsContainer;
     
+    //templates
     public SlotTemplate slotTemplate;
+    public SlotTemplate plantSlotTemplate;
+
     public SlotContainer[] inventorySlots;
+    public SlotContainer[] plantSlots;
     public Item[] items; //array of all available items
 
     SlotContainer selectedItemSlot = null;
@@ -18,17 +23,30 @@ public class Inventory : MonoBehaviour
         singleton = this;
 
         //sets up slot element template
+        plantSlotTemplate.container.rectTransform.pivot = new Vector2(0,1);
+        plantSlotTemplate.container.rectTransform.anchorMax = plantSlotTemplate.container.rectTransform.anchorMin = new Vector2(0,1);
+        plantSlotTemplate.gameObject.SetActive(false);
+
+        //sets up plant slot template
         slotTemplate.container.rectTransform.pivot = new Vector2(0,1);
         slotTemplate.container.rectTransform.anchorMax = slotTemplate.container.rectTransform.anchorMin = new Vector2(0,1);
         slotTemplate.gameObject.SetActive(false);
 
         //initialize inventory slots
-        InitilizeSlotTable(inventorySlotsContainer, slotTemplate, inventorySlots, 16, 1);
+        InitilizeSlotTable(inventorySlotsContainer, slotTemplate, inventorySlots, 16, 0);
         UpdateItems(inventorySlots);
+
+        //initialize plant slots
+        InitilizeSlotTable(plantSlotsContainer, plantSlotTemplate, plantSlots, 16, 1);
+        UpdateItems(plantSlots);
 
         //reset slot element template
         slotTemplate.container.rectTransform.pivot = new Vector2(0.5f, 0.5f);
         slotTemplate.container.raycastTarget = slotTemplate.item.raycastTarget = slotTemplate.count.raycastTarget = false;
+
+        plantSlotTemplate.container.rectTransform.pivot = new Vector2(0.5f, 0.5f);
+        plantSlotTemplate.container.raycastTarget = plantSlotTemplate.item.raycastTarget = plantSlotTemplate.count.raycastTarget = false;
+
     }
 
     private void Update()
@@ -64,19 +82,19 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        if (slotTemplate.gameObject.activeSelf && Input.GetMouseButtonDown(0))
-        {
-            Vector2 localMousePosition = inventorySlotsContainer.InverseTransformPoint(Input.mousePosition);
-            if (!inventorySlotsContainer.rect.Contains(localMousePosition))
-            {
-                // object is selected, mouse has been clicked, and mouse position is outside of Inventory UI
-                GameObject obj = FindItem(slotTemplate.item.sprite).plantObject;
-                if (obj != null)
-                {
-                    Instantiate(obj, Input.mousePosition, transform.rotation, transform.parent);
-                }
-            }
-        }
+        // if (slotTemplate.gameObject.activeSelf && Input.GetMouseButtonDown(0))
+        // {
+        //     Vector2 localMousePosition = inventorySlotsContainer.InverseTransformPoint(Input.mousePosition);
+        //     if (!inventorySlotsContainer.rect.Contains(localMousePosition))
+        //     {
+        //         // object is selected, mouse has been clicked, and mouse position is outside of Inventory UI
+        //         GameObject obj = FindItem(slotTemplate.item.sprite).plantObject;
+        //         if (obj != null)
+        //         {
+        //             Instantiate(obj, Input.mousePosition, transform.rotation, transform.parent);
+        //         }
+        //     }
+        // }
     }
 
     private void InitilizeSlotTable(RectTransform container, SlotTemplate tempSlotTemplate, SlotContainer[] slots, int margin, int tempTableID)
@@ -167,6 +185,13 @@ public class Inventory : MonoBehaviour
             }
         }
 
+        for(int i = 0; i < plantSlots.Length; i++){
+            if(plantSlots[i].slot.hasClicked){
+                plantSlots[i].slot.hasClicked = false;
+                return plantSlots[i];
+            }
+        }
+
         return null;
     }
 
@@ -211,9 +236,61 @@ public class Inventory : MonoBehaviour
                             swapPositions = true;
                         }
                     }
-
+                    //moving to different table
                     else{
-                        //moving to different table (for black market menu)
+                        if(newClickedSlot.tableID == 1){ //plant table
+                            GameObject obj = FindItem(slotTemplate.item.sprite).plantObject;
+                            Debug.Log(obj);
+                            Instantiate(obj, newClickedSlot.slot.item.gameObject.GetComponent<RectTransform>().position, transform.rotation, transform.parent);
+                            selectedItemSlot.itemCount--;
+
+                        }
+
+                        // if (slotTemplate.gameObject.activeSelf && Input.GetMouseButtonDown(0))
+                        // {
+                        //     Vector2 localMousePosition = inventorySlotsContainer.InverseTransformPoint(Input.mousePosition);
+                        //     if (!inventorySlotsContainer.rect.Contains(localMousePosition))
+                        //     {
+                        //         // object is selected, mouse has been clicked, and mouse position is outside of Inventory UI
+                        //         GameObject obj = FindItem(slotTemplate.item.sprite).plantObject;
+                        //         if (obj != null)
+                        //         {
+                        //             Instantiate(obj, Input.mousePosition, transform.rotation, transform.parent);
+                        //         }
+                        //     }
+                        // }
+                        
+                        // if(newClickedSlot.itemSprite == selectedItemSlot.itemSprite){
+                        //     Item slotItem = FindItem(selectedItemSlot.itemSprite);
+                        //     if(slotItem.stackable){
+                        //         //item is the same and stackable
+                        //         selectedItemSlot.itemSprite = null;
+                        //         newClickedSlot.itemCount += selectedItemSlot.itemCount;
+                        //         selectedItemSlot.itemCount = 0;
+                        //     }
+                        //     else{
+                        //         swapPositions = true;
+                        //     }
+                        // }
+                        // else{
+                        //     if(newClickedSlot.itemSprite == null || newClickedSlot.itemSprite == selectedItemSlot.itemSprite){
+                        //         Debug.Log("moved to new table");
+                        //         //add one item from selectedItemSlot
+                        //         newClickedSlot.itemSprite = selectedItemSlot.itemSprite;
+                        //         newClickedSlot.itemCount++;
+                        //         selectedItemSlot.itemCount--;
+                        //         if(selectedItemSlot.itemCount <= 0){
+                        //             //placed last item
+                        //             selectedItemSlot.itemSprite = null;
+                        //         }
+                        //         else{
+                        //             releaseClick = false;
+                        //         }
+                        //     }
+                        //     else{
+                        //         swapPositions = true;
+                        //     }
+                        // }
                     }
                 }
 
@@ -260,9 +337,18 @@ public class Inventory : MonoBehaviour
                 obj.SetActive(false);
                 return;
             }
+
+            else{
+                Debug.Log("error");
+            }
         }
 
         //insert code for what to do when there is no more space in inventory
+    }
+
+    public void RemoveItem()
+    {
+        
     }
     
 }
