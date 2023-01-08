@@ -3777,10 +3777,17 @@ MonoBehaviour:
   - name: Ward
     itemSprite: {fileID: 21300000, guid: 0f533ee39ab1e7c4e94264b1e8ef3233, type: 3}
     cost: 1
-    stackable: 1
+    stackable: 0
     sellable: 0
     plantObject: {fileID: 0}
     isWard: 1
+  - name: Shovel
+    itemSprite: {fileID: 21300000, guid: e57b25d59d6342247b6785531e892ed2, type: 3}
+    cost: 1
+    stackable: 0
+    sellable: 0
+    plantObject: {fileID: 0}
+    isWard: 0
 --- !u!1 &1266711896
 GameObject:
   m_ObjectHideFlags: 0
