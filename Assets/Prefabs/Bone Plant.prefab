@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3350267708926613782
+--- !u!1 &509843086781273102
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,24 +8,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7800466965183413473}
-  - component: {fileID: 1701319100586485689}
-  - component: {fileID: 3078886592448060553}
-  - component: {fileID: 8905938678589015663}
+  - component: {fileID: 7686233198082952065}
+  - component: {fileID: 6169648799342115196}
+  - component: {fileID: 3190517864586721682}
+  - component: {fileID: 2517800977483248605}
+  - component: {fileID: 312615139016845870}
   m_Layer: 5
-  m_Name: EyeballUI
-  m_TagString: Untagged
+  m_Name: Bone Plant
+  m_TagString: plant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &7800466965183413473
+  m_IsActive: 1
+--- !u!224 &7686233198082952065
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3350267708926613782}
+  m_GameObject: {fileID: 509843086781273102}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -36,24 +37,24 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -817, y: -413}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &1701319100586485689
+--- !u!222 &6169648799342115196
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3350267708926613782}
+  m_GameObject: {fileID: 509843086781273102}
   m_CullTransparentMesh: 1
---- !u!114 &3078886592448060553
+--- !u!114 &3190517864586721682
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3350267708926613782}
+  m_GameObject: {fileID: 509843086781273102}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -67,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 315f14371076c45ea9c6ca56b43959d6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c83440c00ed6b7447bfe7b36a917ca7c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -77,18 +78,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8905938678589015663
+--- !u!114 &2517800977483248605
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3350267708926613782}
+  m_GameObject: {fileID: 509843086781273102}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85f695a52f6bc214cbbf944ae76c2937, type: 3}
+  m_Script: {fileID: 11500000, guid: b2069703149450f438697408de8fea31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DragObj: {fileID: 7266064897690240463, guid: 2c54f8c120e2948d1a1b9634984f60bc, type: 3}
-  plantSpawn: {fileID: 509843086781273102, guid: a72b04db7dee50a4a999ddc4f531c31e, type: 3}
-  background: {fileID: 267279314103984352, guid: df85f94099d544650b20cf842f47d3aa, type: 3}
+  timeToMoveStage: 4
+  freshTime: 5
+  durability: 3
+  baseValue: 0
+  sprouting: {fileID: 21300000, guid: 5bcff86c1487b4641858cc297b23448e, type: 3}
+  fresh: {fileID: 21300000, guid: bc57e2ef235eaef4f940bc0e74e5b964, type: 3}
+  wilted: {fileID: 21300000, guid: b696cb3367fb8e145b30271f8f91b9b8, type: 3}
+  seedSprite: {fileID: 21300000, guid: 8d8b450e9e92b994f9bd469bba4a6f8c, type: 3}
+  grownSprite: {fileID: 21300000, guid: bc57e2ef235eaef4f940bc0e74e5b964, type: 3}
+  currentGhostState: 1
+--- !u!114 &312615139016845870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509843086781273102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ed7f66584fd4f94d9898abceeb0d71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
