@@ -9,7 +9,5 @@ public class Item
 {
     public Sprite itemSprite;
     public bool stackable = false; //can the item be stacked?   
-
-
     public GameObject plantObject;
 }
