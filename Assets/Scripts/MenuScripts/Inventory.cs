@@ -50,8 +50,6 @@ public class Inventory : MonoBehaviour
         inventorySlots[1].itemCount = 1;
         inventorySlots[2].itemSprite = items[^1].itemSprite;
         inventorySlots[2].itemCount = 1;
-        inventorySlots[3].itemSprite = items[^3].itemSprite;
-        inventorySlots[3].itemCount = 5;
         UpdateItems(inventorySlots);
 
         //initialize plant slots
@@ -418,6 +416,7 @@ public class Inventory : MonoBehaviour
                     else inventorySlots[i].itemCount = 1;
                     UpdateItems(inventorySlots);
                     obj.SetActive(false);
+
                     return;
                 }
             }

@@ -9,12 +9,14 @@ public class Menus : MonoBehaviour
     public Button inventoryButton;
     public Button closeInventoryButton;
     public Button marketButton;
-    //public Button buyButton; //tobe called in black market script
     public Button sellButton;
+    public Button hintButton;
+    public Button startButton;
 
     [Header("Menus")]
     public GameObject inventoryMenu;
     public GameObject marketMenu;
+    public GameObject tutorialMenu;
 
     private void Start()
     {
@@ -65,6 +67,20 @@ public class Menus : MonoBehaviour
                     }
                 }
             }
+        );
+
+        hintButton.onClick.AddListener(delegate
+            {
+                Time.timeScale = 0;
+                tutorialMenu.SetActive(true);
+            }
+        );
+
+        startButton.onClick.AddListener(delegate
+            {
+                Time.timeScale = 1;
+                tutorialMenu.SetActive(false);
+            }  
         );
     }
 }
