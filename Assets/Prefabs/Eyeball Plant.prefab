@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2069703149450f438697408de8fea31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: Eyeball
   timeToMoveStage: 2
   freshTime: 4
   durability: 2
@@ -100,6 +101,7 @@ MonoBehaviour:
   seedSprite: {fileID: 21300000, guid: f42b33821dfad58428d742dc02b6d153, type: 3}
   grownSprite: {fileID: 21300000, guid: dcea1042200e04c099f0347af55b2fb2, type: 3}
   currentGhostState: 1
+  ghost: {fileID: 0}
 --- !u!114 &312615139016845870
 MonoBehaviour:
   m_ObjectHideFlags: 0

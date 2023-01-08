@@ -12,7 +12,8 @@ public class BlackMarket : MonoBehaviour
     public Item eyeball;
     public Item heart;
     public Item brain;
-    public Item _scarecrow;
+    public Item _scarecrow01;
+    public Item _scarecrow02;
     public Item _ashes;
     public Item _fire;
     public Item _zombie;
@@ -99,11 +100,18 @@ public class BlackMarket : MonoBehaviour
         BuySlotTemplate scarecrow = Instantiate(prefab, transform);
         scarecrow.name.text = "Scarecrow";
         scarecrow.cost.text = "$75";
+        scarecrow.item.sprite = _scarecrow01.itemSprite;
+
+        BuySlotTemplate scarecrow2 = Instantiate(prefab, transform);
+        scarecrow2.name.text = "Scarecrow";
+        scarecrow2.cost.text = "$75";
+        scarecrow2.item.sprite = _scarecrow02.itemSprite;
 
         //Ashes
         BuySlotTemplate ashes = Instantiate(prefab, transform);
         ashes.name.text = "Human Ashes";
         ashes.cost.text = "$30";
+        ashes.item.sprite = _ashes.itemSprite;
 
         //Blue flame
         BuySlotTemplate fire = Instantiate(prefab, transform);

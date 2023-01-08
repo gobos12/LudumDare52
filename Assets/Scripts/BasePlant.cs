@@ -10,6 +10,8 @@ using UnityEngine.UI;
 
 public class BasePlant : MonoBehaviour
 {
+    public string name;
+    
     [Header("Parameters")]
     [SerializeField] private float timeToMoveStage;
     private float growthTimer;
