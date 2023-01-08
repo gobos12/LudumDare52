@@ -420,13 +420,34 @@ MonoBehaviour:
     tableID: 0
     slot: {fileID: 0}
   items:
-  - itemSprite: {fileID: 21300000, guid: 1e18b2ac355dec84482ba7d873a87b16, type: 3}
-    stackable: 1
-    plantObject: {fileID: 0}
   - itemSprite: {fileID: 21300000, guid: f42b33821dfad58428d742dc02b6d153, type: 3}
     stackable: 1
     plantObject: {fileID: 509843086781273102, guid: a72b04db7dee50a4a999ddc4f531c31e, type: 3}
   - itemSprite: {fileID: 21300000, guid: dcea1042200e04c099f0347af55b2fb2, type: 3}
+    stackable: 1
+    plantObject: {fileID: 0}
+  - itemSprite: {fileID: 21300000, guid: 8d8b450e9e92b994f9bd469bba4a6f8c, type: 3}
+    stackable: 1
+    plantObject: {fileID: 509843086781273102, guid: ff407fc15670cff409d98f905f8ee56f, type: 3}
+  - itemSprite: {fileID: 21300000, guid: bc57e2ef235eaef4f940bc0e74e5b964, type: 3}
+    stackable: 1
+    plantObject: {fileID: 0}
+  - itemSprite: {fileID: 21300000, guid: 1e18b2ac355dec84482ba7d873a87b16, type: 3}
+    stackable: 1
+    plantObject: {fileID: 509843086781273102, guid: ac23364aff87fa14d951e375dc916cdd, type: 3}
+  - itemSprite: {fileID: 21300000, guid: c5cba9eca83b054419e00aa8007453cf, type: 3}
+    stackable: 1
+    plantObject: {fileID: 0}
+  - itemSprite: {fileID: 21300000, guid: 9e2d2cb05aa5c6b49ba45b4184235c42, type: 3}
+    stackable: 1
+    plantObject: {fileID: 509843086781273102, guid: fed8fca17b7de5e408ca13d12606837a, type: 3}
+  - itemSprite: {fileID: 21300000, guid: 83b10350b5e67fd48933d1794360775f, type: 3}
+    stackable: 1
+    plantObject: {fileID: 0}
+  - itemSprite: {fileID: 21300000, guid: e0f293dc4b5e20c4992dfe244ab12f36, type: 3}
+    stackable: 1
+    plantObject: {fileID: 509843086781273102, guid: b50615ae26b7f8540ab67246670d52c7, type: 3}
+  - itemSprite: {fileID: 21300000, guid: 73f24037d0b8a8b45a1137a080815bff, type: 3}
     stackable: 1
     plantObject: {fileID: 0}
 --- !u!1 &6065570646675539869
