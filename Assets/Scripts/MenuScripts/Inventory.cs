@@ -67,33 +67,6 @@ public class Inventory : MonoBehaviour
                 slotTemplate.gameObject.SetActive(false);
             }
         }
-
-        if (slotTemplate.gameObject.activeSelf && Input.GetMouseButtonDown(0))
-        {
-            Vector2 localMousePosition = inventorySlotsContainer.InverseTransformPoint(Input.mousePosition);
-            if (!inventorySlotsContainer.rect.Contains(localMousePosition))
-            {
-                // object is selected, mouse has been clicked, and mouse position is outside of Inventory UI
-                GameObject obj = FindItem(slotTemplate.item.sprite).plantObject;
-                if (obj != null)
-                {
-                    GameObject newObj = Instantiate(obj, Input.mousePosition, transform.rotation, transform.parent);
-                    if (newObj != null)
-                    {
-                        selectedItemSlot.itemCount--;
-                        Debug.Log(selectedItemSlot +  " " + selectedItemSlot.itemCount);
-                        if (selectedItemSlot.itemCount == 0)
-                        {
-                            //selectedItemSlot.slot.count.enabled = false;
-                            //selectedItemSlot.slot.item.enabled = false;
-                            //slotTemplate.count.enabled = false;
-                            //slotTemplate.item.enabled = false;
-                            //UpdateItems(inventorySlots);
-                        }
-                    }
-                }
-            }
-        }
     }
 
     private void InitilizeSlotTable(RectTransform container, SlotTemplate tempSlotTemplate, SlotContainer[] slots, int margin, int tempTableID)
@@ -230,7 +203,26 @@ public class Inventory : MonoBehaviour
                     }
 
                     else{
-                        //moving to different table (for black market menu)
+                        // object is selected, mouse has been clicked, and mouse position is outside of Inventory UI
+                                GameObject obj = FindItem(slotTemplate.item.sprite).plantObject;
+                                if (obj != null)
+                                {
+                                    GameObject newObj = Instantiate(obj, newClickedSlot.slot.container.transform.position, transform.rotation, transform.parent);
+                                    if (newObj != null)
+                                    {
+                                        selectedItemSlot.itemCount--;
+                                        Debug.Log(selectedItemSlot +  " " + selectedItemSlot.itemCount);
+                                        if (selectedItemSlot.itemCount <= 0)
+                                        {
+                                            //selectedItemSlot.slot.count.enabled = false;
+                                            //selectedItemSlot.slot.item.enabled = false;
+                                            //slotTemplate.count.enabled = false;
+                                            //slotTemplate.item.enabled = false;
+                                            //UpdateItems(inventorySlots);
+                                            selectedItemSlot.itemSprite = null;
+                                        }
+                                    }
+                        }
                     }
                 }
 

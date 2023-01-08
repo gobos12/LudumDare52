@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
@@ -67,7 +68,14 @@ public class BasePlant : MonoBehaviour
     public void OnPointerClick()
     {
         // calculate value, add to inventory
-        GetComponent<Image>().sprite = grownSprite;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            GetComponent<Image>().sprite = seedSprite;
+        }
+        else
+        {
+            GetComponent<Image>().sprite = grownSprite;
+        }
     }
 
     private float GetItemValue()
