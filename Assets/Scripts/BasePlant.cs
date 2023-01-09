@@ -115,9 +115,11 @@ public class BasePlant : MonoBehaviour
             } else if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).name == "Shovel" && currentStage == 3)
             {
                 gameObject.SetActive(false);
-            } else if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).name == "Ashes")
+            } 
+            else if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).name == "Ashes")
             {
-                Inventory.singleton.SelectedItemSlot.itemCount--;
+                Debug.Log("removing items");
+                //Inventory.singleton.SelectedItemSlot.itemCount--;
                 if (Inventory.singleton.SelectedItemSlot.itemCount <= 0)
                 {
                     Inventory.singleton.SelectedItemSlot.itemSprite = null;

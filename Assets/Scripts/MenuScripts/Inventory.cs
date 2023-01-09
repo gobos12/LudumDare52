@@ -415,16 +415,16 @@ public class Inventory : MonoBehaviour
             }
         }
         
+        
         var type = obj.GetComponent<BasePlant>();
-        Debug.Log(type.name);
         for(int i = 0; i < inventorySlots.Length; i++){
             if(type != null){
                 //if item exists in inventory
                 if(inventorySlots[i].itemSprite == obj.GetComponent<Image>().sprite){
-                    if(type.name == "Teeth") inventorySlots[i].itemCount = rnd.Next(3, 6); //chooses a random value between 3 and 5
-                    else if(type.name == "Bone") inventorySlots[i].itemCount = rnd.Next(2, 5);
-                    else if(type.name == "Eyeball") inventorySlots[i].itemCount = 2;
-                    else inventorySlots[i].itemCount = 1;
+                    if(type.name == "Teeth") inventorySlots[i].itemCount += rnd.Next(3, 6); //chooses a random value between 3 and 5
+                    else if(type.name == "Bone") inventorySlots[i].itemCount += rnd.Next(2, 5);
+                    else if(type.name == "Eyeball") inventorySlots[i].itemCount += 2;
+                    else inventorySlots[i].itemCount += 1;
                     UpdateItems(inventorySlots);
                     obj.SetActive(false);
                     return;
