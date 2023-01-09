@@ -24,6 +24,11 @@ public class BasePlant : MonoBehaviour, IPointerClickHandler
     // Start is called before the first frame update
     void Start()
     {
+<<<<<<< Updated upstream
+=======
+        seed = GetComponent<Image>().sprite;
+        FindObjectOfType<AudioManager>().Play("Plant");
+>>>>>>> Stashed changes
     }
 
     // Update is called once per frame
@@ -55,9 +60,57 @@ public class BasePlant : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+<<<<<<< Updated upstream
         // calculate value, add to inventory
         Debug.Log("test");
         Destroy(gameObject);
+=======
+        if (currentStage == 2 && currentGhostState != GhostState.BeingEaten)
+        {
+            Inventory.singleton.AddItem(gameObject);
+            FindObjectOfType<AudioManager>().Play("Harvest");
+        }
+
+        try
+        {
+            if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).isWard)
+            {
+                ghost.SetActive(false);
+                currentGhostState = GhostState.Unprotected;
+            } else if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).name == "Shovel" && currentStage == 3)
+            {
+                gameObject.SetActive(false);
+                FindObjectOfType<AudioManager>().Play("Shovel");
+            } else if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).name == "Ashes")
+            {
+                Inventory.singleton.SelectedItemSlot.itemCount--;
+                if (Inventory.singleton.SelectedItemSlot.itemCount <= 0)
+                {
+                    Inventory.singleton.SelectedItemSlot.itemSprite = null;
+                }
+                Inventory.singleton.UpdateItems(Inventory.singleton.inventorySlots);
+                Inventory.singleton.UpdateItems(Inventory.singleton.plantSlots);
+                Inventory.singleton.UpdateItems(Inventory.singleton.sellSlots);
+                freshTime += 5;
+            } else if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).name == "Blue Flame")
+            {
+                Debug.Log("getting here");
+                Inventory.singleton.SelectedItemSlot.itemCount--;
+                if (Inventory.singleton.SelectedItemSlot.itemCount <= 0)
+                {
+                    Inventory.singleton.SelectedItemSlot.itemSprite = null;
+                }
+                Inventory.singleton.AddItem(ashes);
+                Inventory.singleton.UpdateItems(Inventory.singleton.inventorySlots);
+                Inventory.singleton.UpdateItems(Inventory.singleton.plantSlots);
+                Inventory.singleton.UpdateItems(Inventory.singleton.sellSlots);
+                gameObject.SetActive(false);
+            }
+        }
+        catch (NullReferenceException e)
+        {
+        }
+>>>>>>> Stashed changes
     }
 
     private float GetItemValue()
