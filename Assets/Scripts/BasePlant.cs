@@ -108,11 +108,53 @@ public class BasePlant : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("Harvest");
         }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        // calculate value, add to inventory
-        Debug.Log("test");
-        Destroy(gameObject);
+        try
+        {
+            if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).isWard)
+            {
+                ghost.SetActive(false);
+                currentGhostState = GhostState.Unprotected;
+            }
+            else if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).name == "Shovel" &&
+                     currentStage == 3)
+            {
+                gameObject.SetActive(false);
+                FindObjectOfType<AudioManager>().Play("Shovel");
+            }
+            else if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).name == "Ashes")
+            {
+                Debug.Log("removing items");
+                Inventory.singleton.SelectedItemSlot.itemCount--;
+                if (Inventory.singleton.SelectedItemSlot.itemCount <= 0)
+                {
+                    Inventory.singleton.SelectedItemSlot.itemSprite = null;
+                }
+
+                Inventory.singleton.UpdateItems(Inventory.singleton.inventorySlots);
+                Inventory.singleton.UpdateItems(Inventory.singleton.plantSlots);
+                Inventory.singleton.UpdateItems(Inventory.singleton.sellSlots);
+                freshTime += 5;
+            }
+            else if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).name ==
+                     "Blue Flame")
+            {
+                Debug.Log("getting here");
+                Inventory.singleton.SelectedItemSlot.itemCount--;
+                if (Inventory.singleton.SelectedItemSlot.itemCount <= 0)
+                {
+                    Inventory.singleton.SelectedItemSlot.itemSprite = null;
+                }
+
+                Inventory.singleton.AddItem(ashes);
+                Inventory.singleton.UpdateItems(Inventory.singleton.inventorySlots);
+                Inventory.singleton.UpdateItems(Inventory.singleton.plantSlots);
+                Inventory.singleton.UpdateItems(Inventory.singleton.sellSlots);
+                gameObject.SetActive(false);
+            }
+        }
+        catch (NullReferenceException e)
+        {
+        }
     }
 
     private void OnDisable()
