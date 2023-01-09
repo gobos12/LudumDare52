@@ -119,7 +119,7 @@ public class BlackMarket : MonoBehaviour
 
         BuySlotTemplate fire = Instantiate(prefab, transform);
         fire.name.text = "Blue Flame";
-        fire.cost.text = "$100";
+        fire.cost.text = "$25";
         fire.item.sprite = _fire.itemSprite;
         fire.buy.onClick.AddListener(delegate
             {
