@@ -45,7 +45,7 @@ public class Inventory : MonoBehaviour
         InitilizeSlotTable(inventorySlotsContainer, slotTemplate, inventorySlots, 32, 0);
         UpdateItems(inventorySlots);
         inventorySlots[0].itemSprite = startingItem.itemSprite;
-        inventorySlots[0].itemCount = 4;
+        inventorySlots[0].itemCount = 5;
         inventorySlots[1].itemSprite = items[^2].itemSprite;
         inventorySlots[1].itemCount = 1;
         inventorySlots[2].itemSprite = items[^1].itemSprite;
@@ -422,7 +422,7 @@ public class Inventory : MonoBehaviour
                 //if item exists in inventory
                 if(inventorySlots[i].itemSprite == obj.GetComponent<Image>().sprite){
                     if(type.name == "Teeth") inventorySlots[i].itemCount += rnd.Next(3, 6); //chooses a random value between 3 and 5
-                    else if(type.name == "Bone") inventorySlots[i].itemCount += rnd.Next(2, 5);
+                    else if(type.name == "Bone") inventorySlots[i].itemCount += rnd.Next(2, 7);
                     else if(type.name == "Eyeball") inventorySlots[i].itemCount += 2;
                     else inventorySlots[i].itemCount += 1;
                     UpdateItems(inventorySlots);

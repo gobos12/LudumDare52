@@ -13,13 +13,30 @@ public class Menus : MonoBehaviour
     public Button hintButton;
     public Button startButton;
 
+    public Button quitButton;
+    public Button backButton;
+
     [Header("Menus")]
     public GameObject inventoryMenu;
     public GameObject marketMenu;
     public GameObject tutorialMenu;
+    public GameObject quitMenu;
 
     private void Start()
     {
+
+        quitButton.onClick.AddListener(delegate
+            {
+                Application.Quit();
+            }
+        );
+
+        backButton.onClick.AddListener(delegate
+            {
+                quitMenu.gameObject.SetActive(false);
+            }
+        );
+
         inventoryButton.onClick.AddListener(delegate
             {
                 //buttons
@@ -94,5 +111,13 @@ public class Menus : MonoBehaviour
                 FindObjectOfType<AudioManager>().Play("Button Click");
             }  
         );
+    }
+
+    private void Update()
+    {
+        //basic input to allow player to exit game
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            quitMenu.gameObject.SetActive(true);
+        }
     }
 }

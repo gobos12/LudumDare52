@@ -20,6 +20,22 @@ public class BlackMarket : MonoBehaviour
 
     private void Start()
     {
+        //bone seeds
+        BuySlotTemplate boneSeeds = Instantiate(prefab, transform);
+        boneSeeds.name.text = "Bone Seeds";
+        boneSeeds.cost.text = "$2";
+        boneSeeds.item.sprite = bones.itemSprite;
+        boneSeeds.buy.onClick.AddListener(delegate
+            {
+                if( (Currency.singleton.myMoney - 2) >= 0)
+                {
+                    Inventory.singleton.AddItem(boneSeeds.item);
+                    Currency.singleton.TakeMoney(2);
+                    FindObjectOfType<AudioManager>().Play("BuySell");
+                }
+            }
+        ); 
+
         //teeth seeds
         BuySlotTemplate teethSeeds = Instantiate(prefab, transform);
         teethSeeds.name.text = "Teeth Seeds";
@@ -36,21 +52,7 @@ public class BlackMarket : MonoBehaviour
             }
         );
 
-        //bone seeds
-        BuySlotTemplate boneSeeds = Instantiate(prefab, transform);
-        boneSeeds.name.text = "Bone Seeds";
-        boneSeeds.cost.text = "$5";
-        boneSeeds.item.sprite = bones.itemSprite;
-        boneSeeds.buy.onClick.AddListener(delegate
-            {
-                if( (Currency.singleton.myMoney - 5) >= 0)
-                {
-                    Inventory.singleton.AddItem(boneSeeds.item);
-                    Currency.singleton.TakeMoney(5);
-                    FindObjectOfType<AudioManager>().Play("BuySell");
-                }
-            }
-        );
+
 
         //eyeball seeds
         BuySlotTemplate eyeballSeeds = Instantiate(prefab, transform);
@@ -106,23 +108,63 @@ public class BlackMarket : MonoBehaviour
         scarecrow.name.text = "Scarecrow";
         scarecrow.cost.text = "$75";
         scarecrow.item.sprite = _scarecrow01.itemSprite;
+        scarecrow.buy.onClick.AddListener(delegate
+            {
+                if( (Currency.singleton.myMoney - 75) >= 0)
+                {
+                    Inventory.singleton.AddItem(scarecrow.item);
+                    Currency.singleton.TakeMoney(75);
+                    FindObjectOfType<AudioManager>().Play("BuySell");
+                }
+            }
+        );
 
         BuySlotTemplate scarecrow2 = Instantiate(prefab, transform);
         scarecrow2.name.text = "Scarecrow";
         scarecrow2.cost.text = "$75";
         scarecrow2.item.sprite = _scarecrow02.itemSprite;
+        scarecrow2.buy.onClick.AddListener(delegate
+            {
+                if( (Currency.singleton.myMoney - 75) >= 0)
+                {
+                    Inventory.singleton.AddItem(scarecrow2.item);
+                    Currency.singleton.TakeMoney(75);
+                    FindObjectOfType<AudioManager>().Play("BuySell");
+                }
+            }
+        );
 
         //Ashes
         BuySlotTemplate ashes = Instantiate(prefab, transform);
         ashes.name.text = "Human Ashes";
         ashes.cost.text = "$30";
         ashes.item.sprite = _ashes.itemSprite;
+        ashes.buy.onClick.AddListener(delegate
+            {
+                if( (Currency.singleton.myMoney - 30) >= 0)
+                {
+                    Inventory.singleton.AddItem(ashes.item);
+                    Currency.singleton.TakeMoney(30);
+                    FindObjectOfType<AudioManager>().Play("BuySell");
+                }
+            }
+        );
 
-        //Blue flame
-        BuySlotTemplate fire = Instantiate(prefab, transform);
-        fire.name.text = "Blue Flame";
-        fire.cost.text = "$100";
-        fire.item.sprite = _fire.itemSprite;
+        // //Blue flame
+        // BuySlotTemplate fire = Instantiate(prefab, transform);
+        // fire.name.text = "Blue Flame";
+        // fire.cost.text = "$100";
+        // fire.item.sprite = _fire.itemSprite;
+        // fire.buy.onClick.AddListener(delegate
+        //     {
+        //         if( (Currency.singleton.myMoney - 100) >= 0)
+        //         {
+        //             Inventory.singleton.AddItem(fire.item);
+        //             Currency.singleton.TakeMoney(100);
+        //             FindObjectOfType<AudioManager>().Play("BuySell");
+        //         }
+        //     }
+        // );
 
         //Zambie
         // BuySlotTemplate zombie = Instantiate(prefab, transform);
