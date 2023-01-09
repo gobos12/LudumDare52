@@ -414,6 +414,7 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
+        
         var type = obj.GetComponent<BasePlant>();
         Debug.Log(type.name);
         for(int i = 0; i < inventorySlots.Length; i++){
