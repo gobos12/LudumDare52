@@ -6,12 +6,18 @@ using UnityEngine.EventSystems;
 
 public class Interactable : MonoBehaviour, IPointerClickHandler
 {
-    public UnityEvent onInteract;
+    //public UnityEvent onInteract; //removed for now bc unnecessary
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        onInteract.Invoke();
-        Debug.Log("clicking");
+        if (gameObject.GetComponent<BasePlant>() != null)
+        {
+            gameObject.GetComponent<BasePlant>().OnPointerClick();
+        } else if (gameObject.GetComponent<Scarecrow>() != null)
+        {
+            Inventory.singleton.AddItem(gameObject);
+        }
+        //Inventory.singleton.AddItem(gameObject);
     }
 
 }

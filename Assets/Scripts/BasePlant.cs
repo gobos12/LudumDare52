@@ -1,121 +1,122 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class BasePlant : MonoBehaviour, IPointerClickHandler
+public class BasePlant : MonoBehaviour
 {
+    public string name;
+    
+    [Header("Parameters")]
     [SerializeField] private float timeToMoveStage;
     private float growthTimer;
     private int currentStage = 0;
     [SerializeField] private float freshTime;
     [SerializeField] private float durability;
-    [SerializeField] private float baseValue;
 
+    [Header("Animation Sprites")] 
+    private Sprite seed;
     [SerializeField] private Sprite sprouting;
     [SerializeField] private Sprite fresh;
     [SerializeField] private Sprite wilted;
+
+    [Header("Inventory Sprites")] [SerializeField]
+    private GameObject ashes;
+    [SerializeField] private Sprite seedSprite;
+    [SerializeField] private Sprite grownSprite;
+
+    public enum GhostState
+    {
+        Protected, Unprotected, BeingEaten
+    }
+
+    [HideInInspector] public GhostState currentGhostState;
+    [HideInInspector] public GameObject ghost;
     
     private float quality;
     // Start is called before the first frame update
     void Start()
     {
-<<<<<<< Updated upstream
-=======
         seed = GetComponent<Image>().sprite;
         FindObjectOfType<AudioManager>().Play("Plant");
->>>>>>> Stashed changes
     }
 
     // Update is called once per frame
     void Update()
     {
-        growthTimer += Time.deltaTime;
-        if (growthTimer > timeToMoveStage && currentStage < 2) // if perfect stage or wilted dont increment
+        if (GetComponent<Image>().sprite == wilted) currentGhostState = GhostState.Protected;
+        
+        if (currentGhostState != GhostState.BeingEaten)
         {
-            growthTimer = 0;
-            currentStage++;
-            switch (currentStage)
+            growthTimer += Time.deltaTime;
+            if (growthTimer > timeToMoveStage && currentStage < 2) // if perfect stage or wilted dont increment
             {
-                case 1:
-                    GetComponent<Image>().sprite = sprouting;
-                    break;
-                case 2:
-                    GetComponent<Image>().sprite = fresh;
-                    break;
+                growthTimer = 0;
+                currentStage++;
+                switch (currentStage)
+                {
+                    case 1:
+                        GetComponent<Image>().sprite = sprouting;
+                        break;
+                    case 2:
+                        GetComponent<Image>().sprite = fresh;
+                        break;
+                }
             }
-        } else if (currentStage == 2 && growthTimer > freshTime)
+            else if (currentStage == 2 && growthTimer > freshTime)
+            {
+                growthTimer = 0;
+                currentStage++;
+                GetComponent<Image>().sprite = wilted;
+            }
+        }
+        else
         {
-            growthTimer = 0;
-            currentStage++;
-            GetComponent<Image>().sprite = wilted;
+            growthTimer += Time.deltaTime / durability;
+            if (growthTimer > timeToMoveStage && currentStage > 0) // if perfect stage or wilted dont increment
+            {
+                growthTimer = 0;
+                currentStage--;
+                switch (currentStage)
+                {
+                    case 0:
+                        GetComponent<Image>().sprite = seed;
+                        break;
+                    case 1:
+                        GetComponent<Image>().sprite = sprouting;
+                        break;
+                    case 2:
+                        GetComponent<Image>().sprite = fresh;
+                        break;
+                }
+            }
         }
 
-        
+
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerClick()
     {
-<<<<<<< Updated upstream
-        // calculate value, add to inventory
-        Debug.Log("test");
-        Destroy(gameObject);
-=======
         if (currentStage == 2 && currentGhostState != GhostState.BeingEaten)
         {
             Inventory.singleton.AddItem(gameObject);
             FindObjectOfType<AudioManager>().Play("Harvest");
         }
 
-        try
-        {
-            if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).isWard)
-            {
-                ghost.SetActive(false);
-                currentGhostState = GhostState.Unprotected;
-            } else if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).name == "Shovel" && currentStage == 3)
-            {
-                gameObject.SetActive(false);
-                FindObjectOfType<AudioManager>().Play("Shovel");
-            } else if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).name == "Ashes")
-            {
-                Inventory.singleton.SelectedItemSlot.itemCount--;
-                if (Inventory.singleton.SelectedItemSlot.itemCount <= 0)
-                {
-                    Inventory.singleton.SelectedItemSlot.itemSprite = null;
-                }
-                Inventory.singleton.UpdateItems(Inventory.singleton.inventorySlots);
-                Inventory.singleton.UpdateItems(Inventory.singleton.plantSlots);
-                Inventory.singleton.UpdateItems(Inventory.singleton.sellSlots);
-                freshTime += 5;
-            } else if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).name == "Blue Flame")
-            {
-                Debug.Log("getting here");
-                Inventory.singleton.SelectedItemSlot.itemCount--;
-                if (Inventory.singleton.SelectedItemSlot.itemCount <= 0)
-                {
-                    Inventory.singleton.SelectedItemSlot.itemSprite = null;
-                }
-                Inventory.singleton.AddItem(ashes);
-                Inventory.singleton.UpdateItems(Inventory.singleton.inventorySlots);
-                Inventory.singleton.UpdateItems(Inventory.singleton.plantSlots);
-                Inventory.singleton.UpdateItems(Inventory.singleton.sellSlots);
-                gameObject.SetActive(false);
-            }
-        }
-        catch (NullReferenceException e)
-        {
-        }
->>>>>>> Stashed changes
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        // calculate value, add to inventory
+        Debug.Log("test");
+        Destroy(gameObject);
     }
 
-    private float GetItemValue()
+    private void OnDisable()
     {
-        if (currentStage == 3) return 0;
-        return baseValue * (currentStage + 1) / 2;
+        if (ghost != null) ghost.SetActive(false);
     }
 }
