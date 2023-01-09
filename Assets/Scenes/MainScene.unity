@@ -7259,6 +7259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1808775598}
   - component: {fileID: 1808775597}
+  - component: {fileID: 1808775599}
   m_Layer: 0
   m_Name: Soundtrack
   m_TagString: Untagged
@@ -7273,10 +7274,10 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1808775596}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 32d31c739599ab44dacf3b1ab162d3ca, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a66dc3e331ddad840a0f25ac3277e405, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -7377,6 +7378,43 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1808775599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808775596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d09cbff3a27112b4891d22ca31ce5059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - clip: {fileID: 8300000, guid: 9c272fceab240e344badeabbc25b689d, type: 3}
+    name: BuySell
+    loop: 0
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 17ef6001c4ea3954e9730145e863c2b2, type: 3}
+    name: Button Click
+    loop: 0
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 0096063f33286c9409301676f2340980, type: 3}
+    name: Shovel
+    loop: 0
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 917a515470100bb479b0f77649d0a23d, type: 3}
+    name: Harvest
+    loop: 0
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
 --- !u!1001 &1820496552
 PrefabInstance:
   m_ObjectHideFlags: 0

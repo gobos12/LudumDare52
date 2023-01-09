@@ -43,6 +43,7 @@ public class BasePlant : MonoBehaviour
     void Start()
     {
         seed = GetComponent<Image>().sprite;
+        FindObjectOfType<AudioManager>().Play("Plant");
     }
 
     // Update is called once per frame
@@ -104,6 +105,7 @@ public class BasePlant : MonoBehaviour
         if (currentStage == 2 && currentGhostState != GhostState.BeingEaten)
         {
             Inventory.singleton.AddItem(gameObject);
+            FindObjectOfType<AudioManager>().Play("Harvest");
         }
 
         try
@@ -115,11 +117,12 @@ public class BasePlant : MonoBehaviour
             } else if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).name == "Shovel" && currentStage == 3)
             {
                 gameObject.SetActive(false);
+                FindObjectOfType<AudioManager>().Play("Shovel");
             } 
             else if (Inventory.singleton.FindItem(Inventory.singleton.SelectedItemSlot.itemSprite).name == "Ashes")
             {
                 Debug.Log("removing items");
-                //Inventory.singleton.SelectedItemSlot.itemCount--;
+                Inventory.singleton.SelectedItemSlot.itemCount--;
                 if (Inventory.singleton.SelectedItemSlot.itemCount <= 0)
                 {
                     Inventory.singleton.SelectedItemSlot.itemSprite = null;

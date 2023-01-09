@@ -27,6 +27,8 @@ public class Menus : MonoBehaviour
                 marketButton.gameObject.SetActive(false);
                 //menus
                 inventoryMenu.gameObject.SetActive(true);
+
+                FindObjectOfType<AudioManager>().Play("Button Click");
                 
             }
         );
@@ -39,6 +41,8 @@ public class Menus : MonoBehaviour
                 //menus
                 inventoryMenu.gameObject.SetActive(false);
                 marketMenu.gameObject.SetActive(false);
+
+                FindObjectOfType<AudioManager>().Play("Button Click");
             }
         );
 
@@ -50,6 +54,8 @@ public class Menus : MonoBehaviour
                 //menus
                 inventoryMenu.gameObject.SetActive(true);
                 marketMenu.gameObject.SetActive(true);
+
+                FindObjectOfType<AudioManager>().Play("Button Click");
             }
         );
 
@@ -63,6 +69,8 @@ public class Menus : MonoBehaviour
                             Currency.singleton.AddMoney(item.cost * Inventory.singleton.sellSlots[i].itemCount);
                             Inventory.singleton.RemoveItem(Inventory.singleton.sellSlots[i]);
                             Inventory.singleton.UpdateItems(Inventory.singleton.sellSlots);
+
+                            FindObjectOfType<AudioManager>().Play("BuySell");
                         }
                     }
                 }
@@ -73,6 +81,8 @@ public class Menus : MonoBehaviour
             {
                 Time.timeScale = 0;
                 tutorialMenu.SetActive(true);
+
+                FindObjectOfType<AudioManager>().Play("Button Click");
             }
         );
 
@@ -80,6 +90,8 @@ public class Menus : MonoBehaviour
             {
                 Time.timeScale = 1;
                 tutorialMenu.SetActive(false);
+
+                FindObjectOfType<AudioManager>().Play("Button Click");
             }  
         );
     }

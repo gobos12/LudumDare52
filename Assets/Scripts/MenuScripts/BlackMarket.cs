@@ -31,6 +31,7 @@ public class BlackMarket : MonoBehaviour
                 {
                     Inventory.singleton.AddItem(teethSeeds.item);
                     Currency.singleton.TakeMoney(5);
+                    FindObjectOfType<AudioManager>().Play("BuySell");
                 }
             }
         );
@@ -46,6 +47,7 @@ public class BlackMarket : MonoBehaviour
                 {
                     Inventory.singleton.AddItem(boneSeeds.item);
                     Currency.singleton.TakeMoney(5);
+                    FindObjectOfType<AudioManager>().Play("BuySell");
                 }
             }
         );
@@ -61,6 +63,7 @@ public class BlackMarket : MonoBehaviour
                 {
                     Inventory.singleton.AddItem(eyeballSeeds.item);
                     Currency.singleton.TakeMoney(10);
+                    FindObjectOfType<AudioManager>().Play("BuySell");
                 }
             }
         );
@@ -77,6 +80,7 @@ public class BlackMarket : MonoBehaviour
                 {
                     Inventory.singleton.AddItem(heartSeeds.item);
                     Currency.singleton.TakeMoney(25);
+                    FindObjectOfType<AudioManager>().Play("BuySell");
                 }
             }
         );
@@ -92,6 +96,7 @@ public class BlackMarket : MonoBehaviour
                 {
                     Inventory.singleton.AddItem(brainSeeds.item);
                     Currency.singleton.TakeMoney(50);
+                    FindObjectOfType<AudioManager>().Play("BuySell");
                 }
             }
         );
@@ -120,8 +125,8 @@ public class BlackMarket : MonoBehaviour
         fire.item.sprite = _fire.itemSprite;
 
         //Zambie
-        BuySlotTemplate zombie = Instantiate(prefab, transform);
-        zombie.name.text = "Zombie";
-        zombie.cost.text = "$250";
+        // BuySlotTemplate zombie = Instantiate(prefab, transform);
+        // zombie.name.text = "Zombie";
+        // zombie.cost.text = "$250";
     }
 }
