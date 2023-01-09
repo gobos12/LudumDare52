@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class BasePlant : MonoBehaviour
 {
     public string name;
+    public bool pickup = false; //ready for pickup by zombie
     
     [Header("Parameters")]
     [SerializeField] private float timeToMoveStage;
@@ -124,5 +125,15 @@ public class BasePlant : MonoBehaviour
     private void OnDisable()
     {
         if (ghost != null) ghost.SetActive(false);
+    }
+
+    public int GetCurrentStage()
+    {
+        return currentStage;
+    }
+
+    public GhostState GetGhostState()
+    {
+        return currentGhostState;
     }
 }
