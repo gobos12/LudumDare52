@@ -5092,11 +5092,12 @@ MonoBehaviour:
     before its time is up! If the organ has withered, it no longer has value. Use
     your shovel to remove any dead plants.\r\n\r\nBe careful! Pesky ghosts will try
     to suck the life out of your plants. There are some ways to get rid of these
-    pests. Use the crucifix in your inventory to temporarily remove them. For a more
-    permanent solution, scatter your plant with human ashes, obtainable through the
-    Black Market. You can also obtain scarecrows through the Black Market to permanently
-    ward away ghosts. \r\n\r\nWe\u2019ve provided you with some teeth seeds to start
-    off. Good luck!\r\n"
+    pests. Use the crucifix in your inventory to temporarily remove them.  You can
+    also obtain scarecrows through the Black Market to place down and permanently
+    ward away ghosts on adjacent tiles. \r\n\nTo make your crops stay fresh for longer,
+    try scattering them with human ashes, which can found on the Black Market or
+    obtained through burning your crops with the Blue Flame. \n\r\nWe\u2019ve provided
+    you with some teeth seeds to start off. Good luck!\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4dbe2e047ca064640ba48497a5473a7f, type: 2}
   m_sharedMaterial: {fileID: 8048037075461306584, guid: 4dbe2e047ca064640ba48497a5473a7f, type: 2}
@@ -5123,8 +5124,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 34
+  m_fontSizeBase: 34
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6785,7 +6786,7 @@ MonoBehaviour:
     isWard: 0
   - name: Grown Brain
     itemSprite: {fileID: 21300000, guid: 41bc5b2f5a6b7ab41a956c61bcbf3e4d, type: 3}
-    cost: 25
+    cost: 75
     stackable: 1
     sellable: 1
     plantObject: {fileID: 0}
@@ -6799,7 +6800,7 @@ MonoBehaviour:
     isWard: 0
   - name: Grown Heart
     itemSprite: {fileID: 21300000, guid: a8a078ef86d1ed34c9cbe05b6dc9a26f, type: 3}
-    cost: 12
+    cost: 30
     stackable: 1
     sellable: 1
     plantObject: {fileID: 0}
@@ -7596,14 +7597,6 @@ MonoBehaviour:
     sellable: 0
     plantObject: {fileID: 4385070878154742895, guid: 1e20ade86c49e9744922e73119254f16, type: 3}
     isWard: 0
-  _scarecrow02:
-    name: Scarecrow02
-    itemSprite: {fileID: 21300000, guid: 35e15bf730aaf804fbcff9db1ec4e7aa, type: 3}
-    cost: 0
-    stackable: 0
-    sellable: 0
-    plantObject: {fileID: 4385070878154742895, guid: 1e20ade86c49e9744922e73119254f16, type: 3}
-    isWard: 0
   _ashes:
     name: 
     itemSprite: {fileID: 21300000, guid: e4ae48e68adea4b4faf2c6c808dffacc, type: 3}
@@ -7614,7 +7607,7 @@ MonoBehaviour:
     isWard: 0
   _fire:
     name: 
-    itemSprite: {fileID: 1664671096, guid: 1385e8f786257d54cb1f920cd59a7f66, type: 3}
+    itemSprite: {fileID: 21300000, guid: 1b35de2878b9e574eb1c8ffd73be310c, type: 3}
     cost: 0
     stackable: 0
     sellable: 0
@@ -7730,7 +7723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1500101962
 RectTransform:
   m_ObjectHideFlags: 0

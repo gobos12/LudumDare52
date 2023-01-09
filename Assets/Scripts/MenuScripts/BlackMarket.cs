@@ -13,7 +13,6 @@ public class BlackMarket : MonoBehaviour
     public Item heart;
     public Item brain;
     public Item _scarecrow01;
-    public Item _scarecrow02;
     public Item _ashes;
     public Item _fire;
     public Item _zombie;
@@ -119,16 +118,16 @@ public class BlackMarket : MonoBehaviour
             }
         );
 
-        BuySlotTemplate scarecrow2 = Instantiate(prefab, transform);
-        scarecrow2.name.text = "Scarecrow";
-        scarecrow2.cost.text = "$75";
-        scarecrow2.item.sprite = _scarecrow02.itemSprite;
-        scarecrow2.buy.onClick.AddListener(delegate
+        BuySlotTemplate fire = Instantiate(prefab, transform);
+        fire.name.text = "Blue Flame";
+        fire.cost.text = "$100";
+        fire.item.sprite = _fire.itemSprite;
+        fire.buy.onClick.AddListener(delegate
             {
-                if( (Currency.singleton.myMoney - 75) >= 0)
+                if( (Currency.singleton.myMoney - 25) >= 0)
                 {
-                    Inventory.singleton.AddItem(scarecrow2.item);
-                    Currency.singleton.TakeMoney(75);
+                    Inventory.singleton.AddItem(fire.item);
+                    Currency.singleton.TakeMoney(25);
                     FindObjectOfType<AudioManager>().Play("BuySell");
                 }
             }
